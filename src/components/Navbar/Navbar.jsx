@@ -1,9 +1,10 @@
 import React from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import logo from "./../../assets/image-removebg-preview (3).png";
 const Navbar = () => {
-  const user = true;
-  //
+  const user = false;
+  const navigate = useNavigate();
+
   const navName = [
     "Home",
     "All Reviews",
@@ -78,7 +79,7 @@ const Navbar = () => {
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* Navbar */}
-          <nav className=" bg-black/85 w-full  flex justify-between items-center h-20 text-white px-10">
+          <nav className=" bg-black/85 w-full  flex justify-between items-center h-20 px-2 text-white sm:px-5 md:px-10">
             <div className="md:hidden">
               <label
                 htmlFor="my-drawer-3"
@@ -121,10 +122,10 @@ const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <button>
+                    <button onClick={() => navigate("/log-in")}>
                       <li>Login</li>
                     </button>
-                    <button>
+                    <button onClick={() => navigate("/register")}>
                       <li>Register</li>
                     </button>
                   </>
