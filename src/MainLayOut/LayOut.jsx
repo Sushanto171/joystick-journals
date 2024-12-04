@@ -1,10 +1,18 @@
 import { Outlet } from "react-router";
+import Footer from "./../components/Footer/Footer";
+import Navbar from "./../components/Navbar/Navbar";
 
 const LayOut = () => {
   return (
     <div>
-      <h1>Main Lay out</h1>
+      {/* navbar */}
+      <Navbar />
+
+      {/* dynamic */}
       <Outlet />
+
+      {/* footer */}
+      <Footer />
     </div>
   );
 };
