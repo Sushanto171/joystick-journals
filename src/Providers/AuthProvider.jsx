@@ -1,4 +1,5 @@
 import {
+  GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
@@ -26,16 +27,22 @@ const AuthProvider = ({ children }) => {
   }, []);
   // providers
   const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
 
   // auth service
   const logInWithGoogle = () => {
     return signInWithPopup(auth, googleProvider);
   };
 
+  const logInWithGithub = () => {
+    return signInWithPopup(auth, githubProvider);
+  };
+
   const info = {
     setUser,
     user,
     logInWithGoogle,
+    logInWithGithub,
   };
 
   console.log(user);

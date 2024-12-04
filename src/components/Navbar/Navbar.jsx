@@ -76,9 +76,9 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="drawer">
-        <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col">
+      <div className="drawer ">
+        <input id="my-drawer-3" type="checkbox" className="drawer-toggle " />
+        <div className="drawer-content flex flex-col ">
           {/* Navbar */}
           <nav className=" bg-black/85 w-full  flex justify-between items-center h-20 px-2 text-white/80 sm:px-5 md:px-10">
             <div className="md:hidden">
@@ -153,7 +153,9 @@ const Navbar = () => {
                 )}
               </ul>
               <div
-                className="w-10 h-10 bg-white rounded-full tooltip tooltip-bottom"
+                className={`w-10 h-10 bg-white rounded-full tooltip tooltip-bottom ${
+                  !user && "hidden"
+                }`}
                 data-tip="hello"
               >
                 <img className="w-10 h-10 rounded-full" src="" alt="" />
@@ -161,7 +163,7 @@ const Navbar = () => {
             </div>
           </nav>
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side ">
           <label
             htmlFor="my-drawer-3"
             aria-label="close sidebar"
