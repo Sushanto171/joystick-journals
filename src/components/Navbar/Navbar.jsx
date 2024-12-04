@@ -1,9 +1,13 @@
 import "animate.css";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
+import { Tooltip } from "react-tooltip";
+import { AuthContext } from "../../Providers/AuthProvider";
 import logo from "./../../assets/image-removebg-preview (3).png";
+import { successAlert } from "./../alert/SuccessAlert";
+
 const Navbar = () => {
-  const user = false;
+  const { user, signOutUser, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const navName = [
@@ -34,46 +38,18 @@ const Navbar = () => {
       )}
     </NavLink>
   ));
+  useEffect(() => {
+    fetch(`http://localhost:4000/users/${user?.email}`)
+      .then((res) => user && res.json())
+      .then((data) => {
+        setUser(data);
+      });
+  }, []);
 
-  {
-    /* <NavLink
-        to="/dsf"
-        className={({ isActive }) => (isActive ? "text-[#28AE4E]-500" : "")}
-      >
-        <li className="relative group">
-          All Reviews
-          <div className="absolute -bottom-1  left-0 w-0 group-hover:w-full duration-200 h-1 bg-[#28AE4E] rounded-full"></div>
-        </li>
-      </NavLink>{" "}
-      <NavLink
-        to="afd"
-        className={({ isActive }) => (isActive ? "text-[#28AE4E]-500" : "")}
-      >
-        <li className="relative group">
-          Add Review
-          <div className="absolute -bottom-1  left-0 w-0 group-hover:w-full duration-200 h-1 bg-[#28AE4E] rounded-full"></div>
-        </li>
-      </NavLink>{" "}
-      <NavLink
-        to="/sadf"
-        className={({ isActive }) => (isActive ? "text-[#28AE4E]-500" : "")}
-      >
-        <li className="relative group">
-          My Reviews
-          <div className="absolute -bottom-1  left-0 w-0 group-hover:w-full duration-200 h-1 bg-[#28AE4E] rounded-full"></div>
-        </li>
-      </NavLink>{" "}
-      <NavLink
-        to="/fds"
-        className={({ isActive }) => (isActive ? "text-[#28AE4E]-500" : "")}
-      >
-        <li className="relative group">
-          Game WatchList
-          <div className="absolute -bottom-1  left-0 w-0 group-hover:w-full duration-200 h-1 bg-[#28AE4E] rounded-full"></div>
-        </li>
-      </NavLink> */
-  }
-
+  // sign out
+  const signOutUserHandler = () => {
+    signOutUser().then(() => successAlert("Sign out success!"));
+  };
   return (
     <>
       <div className="drawer ">
@@ -117,7 +93,10 @@ const Navbar = () => {
               <ul className="menu menu-horizontal ">
                 {user ? (
                   <>
-                    <button>
+                    <button
+                      onClick={signOutUserHandler}
+                      className="btn btn-sm btn-outline hidden sm:block hover:border-[#28AE4E] hover:text-[#28AE4E] text-white/80"
+                    >
                       <li>Sign Out</li>
                     </button>
                   </>
@@ -153,12 +132,22 @@ const Navbar = () => {
                 )}
               </ul>
               <div
-                className={`w-10 h-10 bg-white rounded-full tooltip tooltip-bottom ${
+                className={`w-10 h-10 bg-white rounded-full  ${
                   !user && "hidden"
                 }`}
-                data-tip="hello"
+                data-tooltip-id="my-tooltip-border"
+                data-tooltip-content={user?.name || user?.displayName}
               >
-                <img className="w-10 h-10 rounded-full" src="" alt="" />
+                <Tooltip
+                  id="my-tooltip-border"
+                  border="1px solid green"
+                  place="left-end"
+                />
+                <img
+                  className="w-10 h-10 rounded-full"
+                  src={user?.photo || user?.photoURL}
+                  alt=""
+                />
               </div>
             </div>
           </nav>
@@ -172,6 +161,12 @@ const Navbar = () => {
           <ul className="menu bg-base-200 min-h-full w-80 p-4">
             {/* Sidebar content here */}
             {links}
+            <button
+              onClick={signOutUserHandler}
+              className="btn btn-sm btn-outline hover:border-[#28AE4E] hover:text-[#28AE4E] "
+            >
+              <li>Sign Out</li>
+            </button>
           </ul>
         </div>
       </div>

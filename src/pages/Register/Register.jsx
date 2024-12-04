@@ -1,13 +1,46 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { FaEyeSlash, FaFacebook, FaGithub, FaRegEye } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { successAlert } from "../../components/alert/SuccessAlert";
 const Register = () => {
-  const { logInWithGoogle, logInWithGithub } = useContext(AuthContext);
+  const { logInWithGoogle, logInWithGithub, createUser, setUser } =
+    useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [success, setSuccess] = useState("");
   const [error, setError] = useState(null);
+  const passRef = useRef();
+
+  // user create
+  const passChecker = (e) => {
+    setError("");
+    setSuccess("");
+    const password = e.target.value;
+
+    // Check for lowercase letter
+    if (!/[a-z]/.test(password)) {
+      setError("Password must contain at least one lowercase letter.");
+      return;
+    }
+
+    // Check for uppercase letter
+    if (!/[A-Z]/.test(password)) {
+      setError("Password must contain at least one uppercase letter.");
+      return;
+    }
+
+    // Check for minimum length
+    if (password.length < 6) {
+      setError("Password must be at least six characters or longer.");
+      return;
+    }
+
+    // Clear any errors
+    setError("");
+    setSuccess("Password is very strong! 💪");
+  };
+
   const registerFormHandler = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -16,7 +49,52 @@ const Register = () => {
     const name = form.name.value;
     const photo = form.photo.value;
     const terms = form.terms.checked;
-    console.log({ email, password, name, photo, terms });
+    const data = { email, password, name, photo, terms };
+
+    // Check for lowercase letter
+    if (!/[a-z]/.test(password)) {
+      setError("Password must contain at least one lowercase letter.");
+      return;
+    }
+
+    // Check for uppercase letter
+    if (!/[A-Z]/.test(password)) {
+      setError("Password must contain at least one uppercase letter.");
+      return;
+    }
+
+    // Check for minimum length
+    if (password.length < 6) {
+      setError("Password must be at least six characters or longer.");
+      return;
+    }
+
+    // If all validations pass
+    setError("");
+    setSuccess("");
+
+    // user create
+    createUser(email, password)
+      .then(() => {
+        fetch(`http://localhost:4000/users/${email}`, {
+          method: "PUT",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then(() => {
+            successAlert("Register Success!");
+            setUser(data);
+            form.reset();
+          });
+      })
+      .catch((error) => {
+        setError(
+          error.code === "auth/email-already-in-use"
+            ? "This email already exist!."
+            : error.code
+        );
+      });
   };
 
   // logInWithGoogleHandler
@@ -35,6 +113,7 @@ const Register = () => {
         })
           .then((res) => res.json())
           .then((data) => {
+            console.log(data);
             successAlert("Log in success");
           });
       })
@@ -122,6 +201,8 @@ const Register = () => {
               </label>
               <div className="relative">
                 <input
+                  ref={passRef}
+                  onChange={passChecker}
                   type={`${showPassword ? "text" : "password"}`}
                   placeholder="password"
                   className="input input-bordered w-full"
@@ -139,9 +220,16 @@ const Register = () => {
             </div>
             <div className="col-span-2  md:flex flex-row-reverse justify-between items-center">
               <div className="h-3 relative">
-                <p className="text-xs mr-2 text-error absolute top-1 left-2 md:static">
-                  {error}
-                </p>
+                {error && (
+                  <p className="text-xs mr-2 text-error absolute top-1 left-2 md:static">
+                    {error}
+                  </p>
+                )}
+                {success && (
+                  <p className="text-xs mr-2 text-success absolute top-1 left-2 md:static">
+                    {success}
+                  </p>
+                )}
               </div>
               <div className="form-control">
                 <label className="cursor-pointer label justify-start gap-2">
