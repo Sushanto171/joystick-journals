@@ -48,7 +48,10 @@ const Navbar = () => {
 
   // sign out
   const signOutUserHandler = () => {
-    signOutUser().then(() => successAlert("Sign out success!"));
+    signOutUser().then(() => {
+      successAlert("Sign out success!");
+    });
+    navigate("/");
   };
   return (
     <>

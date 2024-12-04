@@ -1,12 +1,11 @@
 import { createBrowserRouter } from "react-router";
 import LogIn from "../pages/logIn/LogIn";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import LayOut from "./../MainLayOut/LayOut";
 import AddReview from "./../pages/addReview/AddReview";
 import AllReview from "./../pages/allReview/AllReview";
 import ErrorPage from "./../pages/ErrorPage/ErrorPage";
-import GameWatchList from "./../pages/GameWatchList/GameWatchList";
 import Home from "./../pages/home/Home";
-import MyReview from "./../pages/MyReview/MyReview";
 import Register from "./../pages/Register/Register";
 const router = createBrowserRouter([
   {
@@ -24,15 +23,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-review",
-        element: <AddReview />,
+        element: (
+          <PrivateRoute>
+            <AddReview />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-reviews",
-        element: <MyReview />,
+        element: (
+          <PrivateRoute>
+            <AddReview />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/game-watchlist",
-        element: <GameWatchList />,
+        element: (
+          <PrivateRoute>
+            <AddReview />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/log-in",

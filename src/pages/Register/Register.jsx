@@ -1,7 +1,7 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaEyeSlash, FaFacebook, FaGithub, FaRegEye } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { successAlert } from "../../components/alert/SuccessAlert";
 const Register = () => {
@@ -10,8 +10,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState(null);
-  const passRef = useRef();
-
+  const navigate = useNavigate();
   // user create
   const passChecker = (e) => {
     setError("");
@@ -49,7 +48,7 @@ const Register = () => {
     const name = form.name.value;
     const photo = form.photo.value;
     const terms = form.terms.checked;
-    const data = { email, password, name, photo, terms };
+    const data = { email, name, photo, terms };
 
     // Check for lowercase letter
     if (!/[a-z]/.test(password)) {
@@ -86,12 +85,15 @@ const Register = () => {
             successAlert("Register Success!");
             setUser(data);
             form.reset();
+            navigate("/");
           });
       })
       .catch((error) => {
         setError(
           error.code === "auth/email-already-in-use"
             ? "This email already exist!."
+            : error.code === "auth/invalid-email"
+            ? "Type valid email address!"
             : error.code
         );
       });
@@ -113,8 +115,8 @@ const Register = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             successAlert("Log in success");
+            navigate("/");
           });
       })
       .catch((error) => {
@@ -143,6 +145,7 @@ const Register = () => {
           .then((res) => res.json())
           .then((data) => {
             successAlert("Log in success");
+            navigate("/");
           });
       })
       .catch((error) => {
@@ -201,7 +204,6 @@ const Register = () => {
               </label>
               <div className="relative">
                 <input
-                  ref={passRef}
                   onChange={passChecker}
                   type={`${showPassword ? "text" : "password"}`}
                   placeholder="password"

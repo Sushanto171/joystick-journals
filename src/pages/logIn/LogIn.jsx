@@ -1,19 +1,39 @@
 import React, { useContext, useState } from "react";
 import { FaEyeSlash, FaFacebook, FaGithub, FaRegEye } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { successAlert } from "../../components/alert/SuccessAlert";
+
 const LogIn = () => {
-  const { logInWithGoogle, logInWithGithub } = useContext(AuthContext);
+  const { logInWithGoogle, logInWithGithub, signInWithEmailPass, setUser } =
+    useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
   const logInFormHandler = (e) => {
+    setError("");
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
     console.log({ email, password });
+    signInWithEmailPass(email, password)
+      .then((res) => {
+        const user = res.user;
+        fetch(`http://localhost:4000/users/${user?.email}`)
+          .then((res) => user && res.json())
+          .then((data) => {
+            setUser(data);
+            form.reset();
+            successAlert("Log in success!");
+            navigate("/");
+          });
+      })
+      .catch((error) => {
+        setError(error.code);
+        form.password.value = "";
+      });
   };
 
   // logInWithGoogleHandler
@@ -33,6 +53,7 @@ const LogIn = () => {
           .then((res) => res.json())
           .then((data) => {
             successAlert("Log in success");
+            navigate("/");
           });
       })
       .catch((error) => {
@@ -61,6 +82,7 @@ const LogIn = () => {
           .then((res) => res.json())
           .then((data) => {
             successAlert("Log in success");
+            navigate("/");
           });
       })
       .catch((error) => {
