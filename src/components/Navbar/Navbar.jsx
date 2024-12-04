@@ -1,3 +1,4 @@
+import "animate.css";
 import React from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import logo from "./../../assets/image-removebg-preview (3).png";
@@ -17,7 +18,7 @@ const Navbar = () => {
     <NavLink
       key={i}
       to={`/${name === "Home" ? "" : name.toLowerCase().split(" ").join("-")}`}
-      className={({ isActive }) => `${isActive ? "text-green-500 " : ""} 
+      className={({ isActive }) => `${isActive ? "text-[#28AE4E] " : ""} 
       ${i > 1 ? (user ? "" : `hidden`) : ""}
       `}
     >
@@ -27,7 +28,7 @@ const Navbar = () => {
           <div
             className={`hidden lg:block ${
               isActive ? "w-full" : "w-0 group-hover:w-full "
-            } absolute -bottom-1  left-0  duration-200 h-1 bg-[#28AE4E] rounded-full`}
+            } absolute -bottom-1  left-0  duration-200 h-0.5 bg-[#28AE4E] rounded-full`}
           ></div>
         </li>
       )}
@@ -37,7 +38,7 @@ const Navbar = () => {
   {
     /* <NavLink
         to="/dsf"
-        className={({ isActive }) => (isActive ? "text-green-500" : "")}
+        className={({ isActive }) => (isActive ? "text-[#28AE4E]-500" : "")}
       >
         <li className="relative group">
           All Reviews
@@ -46,7 +47,7 @@ const Navbar = () => {
       </NavLink>{" "}
       <NavLink
         to="afd"
-        className={({ isActive }) => (isActive ? "text-green-500" : "")}
+        className={({ isActive }) => (isActive ? "text-[#28AE4E]-500" : "")}
       >
         <li className="relative group">
           Add Review
@@ -55,7 +56,7 @@ const Navbar = () => {
       </NavLink>{" "}
       <NavLink
         to="/sadf"
-        className={({ isActive }) => (isActive ? "text-green-500" : "")}
+        className={({ isActive }) => (isActive ? "text-[#28AE4E]-500" : "")}
       >
         <li className="relative group">
           My Reviews
@@ -64,7 +65,7 @@ const Navbar = () => {
       </NavLink>{" "}
       <NavLink
         to="/fds"
-        className={({ isActive }) => (isActive ? "text-green-500" : "")}
+        className={({ isActive }) => (isActive ? "text-[#28AE4E]-500" : "")}
       >
         <li className="relative group">
           Game WatchList
@@ -79,7 +80,7 @@ const Navbar = () => {
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* Navbar */}
-          <nav className=" bg-black/85 w-full  flex justify-between items-center h-20 px-2 text-white sm:px-5 md:px-10">
+          <nav className=" bg-black/85 w-full  flex justify-between items-center h-20 px-2 text-white/80 sm:px-5 md:px-10">
             <div className="md:hidden">
               <label
                 htmlFor="my-drawer-3"
@@ -121,18 +122,38 @@ const Navbar = () => {
                     </button>
                   </>
                 ) : (
-                  <>
-                    <button onClick={() => navigate("/log-in")}>
-                      <li>Login</li>
-                    </button>
-                    <button onClick={() => navigate("/register")}>
+                  <div className="relative">
+                    <NavLink
+                      to="/log-in"
+                      className={({ isActive }) => `
+                          ${
+                            isActive
+                              ? "bg-[#28AE4E] text-white"
+                              : "bg-inherit text-[#28AE4E]"
+                          } 
+                          btn btn-sm hover:text-white hover:bg-[#28AE4E] hover:border-[#28AE4E]
+                          border rounded-md border-[#28AE4E] 
+                          animate__animated  animate__headShake animate__infinite	animate__slower animate__delay-2s 
+                        `}
+                    >
+                      Log In
+                    </NavLink>
+                    <NavLink
+                      to="/register"
+                      className={({ isActive }) => `${
+                        isActive
+                          ? "bg-[#28AE4E] text-white"
+                          : "bg-inherit text-[#28AE4E]"
+                      }
+                        btn btn-sm hover:text-white hover:bg-[#28AE4E] hover:border-[#28AE4E] border rounded-md border-[#28AE4E] ml-2`}
+                    >
                       <li>Register</li>
-                    </button>
-                  </>
+                    </NavLink>
+                  </div>
                 )}
               </ul>
               <div
-                className="bg-white rounded-full tooltip tooltip-bottom"
+                className="w-10 h-10 bg-white rounded-full tooltip tooltip-bottom"
                 data-tip="hello"
               >
                 <img className="w-10 h-10 rounded-full" src="" alt="" />

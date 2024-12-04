@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaEyeSlash, FaFacebook, FaGithub, FaRegEye } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router";
+import { AuthContext } from "../../Providers/AuthProvider";
 const LogIn = () => {
+  const { logInWithGoogle } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const logInFormHandler = (e) => {
     e.preventDefault();
@@ -11,10 +13,15 @@ const LogIn = () => {
     const password = form.password.value;
     console.log({ email, password });
   };
+
+  // logInWithGoogleHandler
+  const logInWithGoogleHandler = () => {
+    logInWithGoogle().then((res) => console.log(res));
+  };
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center bg-base-100">
       <h2 className="my-5 text-2xl md:text-3xl font-semibold">Log in Now</h2>
-      <div className="card bg-base-100 w-full rounded-md border-b-4 border-gray-50 hover:border-green-400 max-w-sm shrink-0 shadow hover:shadow-2xl">
+      <div className="card w-full rounded-md border-b-4 hover:border-[#28AE4E] max-w-sm shrink-0 shadow hover:shadow-2xl">
         <form className="card-body pb-0 " onSubmit={logInFormHandler}>
           <div className="form-control">
             <label className="label">
@@ -58,7 +65,7 @@ const LogIn = () => {
             </label>
           </div>
           <div className="form-control">
-            <button className="btn bg-green-300 hover:bg-green-400 font-bold">
+            <button className="btn bg-[#4ade80] hover:bg-[#28AE4E] font-bold">
               Login
             </button>
             <div className="divider">OR</div>
@@ -66,7 +73,10 @@ const LogIn = () => {
         </form>
         <div className="mb-2 px-10">
           <div className="flex justify-center items-center gap-3 mb-3">
-            <button className="btn btn-sm rounded-full">
+            <button
+              onClick={logInWithGoogleHandler}
+              className="btn btn-sm rounded-full"
+            >
               <FcGoogle />
             </button>
             <button className="btn btn-sm rounded-full">
