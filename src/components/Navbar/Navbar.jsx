@@ -187,7 +187,6 @@ const Navbar = () => {
                     onClick={() => setDark(!dark)}
                     type="checkbox"
                     className="toggle "
-                    defaultChecked
                   />
                 </label>
               </div>
