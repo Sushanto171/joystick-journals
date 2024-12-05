@@ -1,5 +1,5 @@
 import "animate.css";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import { Tooltip } from "react-tooltip";
 import { AuthContext } from "../../Providers/AuthProvider";
@@ -9,6 +9,15 @@ import { successAlert } from "./../alert/SuccessAlert";
 const Navbar = () => {
   const { user, signOutUser, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [dark, setDark] = useState(false);
+
+  // theme change
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-theme",
+      `${dark ? "dark" : "light"}`
+    );
+  }, [dark]);
 
   const navName = [
     "Home",
@@ -92,7 +101,17 @@ const Navbar = () => {
                 {links}
               </ul>
             </div>
-            <div className=" flex ">
+            <div className=" flex items-center gap-2">
+              <div className="form-control hidden sm:block ">
+                <label className="label cursor-pointer">
+                  <input
+                    onClick={() => setDark(!dark)}
+                    type="checkbox"
+                    className="toggle "
+                    defaultChecked
+                  />
+                </label>
+              </div>
               <ul className="menu menu-horizontal ">
                 {user ? (
                   <>
@@ -155,21 +174,32 @@ const Navbar = () => {
             </div>
           </nav>
         </div>
-        <div className="drawer-side ">
+        <div className="drawer-side z-50">
           <label
             htmlFor="my-drawer-3"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-base-200 min-h-full w-80 p-4">
-            {/* Sidebar content here */}
+          <ul className="menu bg-base-200 min-h-full z-50 w-80 p-4">
+            <div className="flex justify-between items-center">
+              <div className="form-control">
+                <label className="label cursor-pointer">
+                  <input
+                    onClick={() => setDark(!dark)}
+                    type="checkbox"
+                    className="toggle "
+                    defaultChecked
+                  />
+                </label>
+              </div>
+              <button
+                onClick={signOutUserHandler}
+                className="btn btn-sm btn-outline hover:border-[#28AE4E] hover:text-[#28AE4E] "
+              >
+                <li>Sign Out</li>
+              </button>
+            </div>
             {links}
-            <button
-              onClick={signOutUserHandler}
-              className="btn btn-sm btn-outline hover:border-[#28AE4E] hover:text-[#28AE4E] "
-            >
-              <li>Sign Out</li>
-            </button>
           </ul>
         </div>
       </div>
