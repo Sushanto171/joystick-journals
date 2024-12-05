@@ -180,8 +180,8 @@ const Navbar = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-base-200 min-h-full z-50 w-80 p-4">
-            <div className="flex justify-between items-center">
+          <ul className="menu bg-base-200 min-h-full z-50 w-80">
+            <div className="flex justify-between bg-base-300 items-center border-b-2 mb-5 p-2">
               <div className="form-control">
                 <label className="label cursor-pointer">
                   <input
@@ -192,14 +192,16 @@ const Navbar = () => {
                   />
                 </label>
               </div>
-              <button
-                onClick={signOutUserHandler}
-                className="btn btn-sm btn-outline hover:border-[#28AE4E] hover:text-[#28AE4E] "
-              >
-                <li>Sign Out</li>
-              </button>
+              {user && (
+                <button
+                  onClick={signOutUserHandler}
+                  className="btn btn-sm btn-outline hover:border-[#28AE4E] hover:text-[#28AE4E] "
+                >
+                  <li>Sign Out</li>
+                </button>
+              )}
             </div>
-            {links}
+            <span className="px-4 flex flex-col gap-4">{links}</span>
           </ul>
         </div>
       </div>

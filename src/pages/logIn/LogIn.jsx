@@ -164,7 +164,7 @@ const LogIn = () => {
               <FaGithub size={20} />
             </button>
           </div>
-          <p className="text-sm">
+          <p className="text-sm py-4 sm:py-0">
             Don't have an account?
             <Link to="/register" className="underline">
               Register
