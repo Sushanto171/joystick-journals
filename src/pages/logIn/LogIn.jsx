@@ -11,6 +11,9 @@ const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  // const location = useLocation();
+  // console.log(location);
+
   const logInFormHandler = (e) => {
     setError("");
     e.preventDefault();
@@ -140,7 +143,7 @@ const LogIn = () => {
             </label>
           </div>
           <div className="form-control">
-            <button className="btn bg-[#4ade80] hover:bg-[#28AE4E] font-bold">
+            <button className="btn bg-[#4ade80] hover:bg-[#28AE4E] font-bold text-white">
               Login
             </button>
             <div className="divider">OR</div>

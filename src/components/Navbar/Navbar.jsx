@@ -9,7 +9,7 @@ import { successAlert } from "./../alert/SuccessAlert";
 const Navbar = () => {
   const { user, signOutUser, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(true);
 
   // theme change
   useEffect(() => {
@@ -108,7 +108,6 @@ const Navbar = () => {
                     onClick={() => setDark(!dark)}
                     type="checkbox"
                     className="toggle "
-                    defaultChecked
                   />
                 </label>
               </div>

@@ -246,7 +246,7 @@ const Register = () => {
             </div>
           </div>
           <div className="form-control">
-            <button className="btn bg-[#4ade80] hover:bg-[#28AE4E] font-bold">
+            <button className="btn bg-[#4ade80] hover:bg-[#28AE4E] font-bold text-white">
               Register now
             </button>
             <div className="divider">OR</div>

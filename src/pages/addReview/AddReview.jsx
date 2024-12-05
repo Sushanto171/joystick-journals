@@ -4,6 +4,7 @@ import { successAlert } from "../../components/alert/SuccessAlert";
 
 const AddReview = () => {
   const { user, setUser } = useContext(AuthContext);
+
   useEffect(() => {
     fetch(`http://localhost:4000/users/${user?.email}`)
       .then((res) => user && res.json())
@@ -21,7 +22,6 @@ const AddReview = () => {
   const addReviewHandler = (e) => {
     e.preventDefault();
     const form = e.target;
-    console.log(form);
     const gameTitle = form.gameTitle.value;
     const thumbnail = form.thumbnail.value;
     const description = form.description.value;
@@ -185,7 +185,7 @@ const AddReview = () => {
             </div>
           </div>
           <div className="form-control mt-6">
-            <button className="btn bg-[#4ade80] hover:bg-[#28AE4E] font-bold">
+            <button className="btn bg-[#4ade80] hover:bg-[#28AE4E] font-bold text-white">
               Add Review
             </button>
           </div>

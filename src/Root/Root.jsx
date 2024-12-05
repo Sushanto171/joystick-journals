@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router";
+import ReviewDetails from "../components/ReviewDetails/ReviewDetails";
 import LogIn from "../pages/logIn/LogIn";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import LayOut from "./../MainLayOut/LayOut";
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/all-reviews",
+        loader: () => fetch("http://localhost:4000/reviews"),
         element: <AllReview />,
       },
       {
@@ -26,6 +28,16 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddReview />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/review-details/:id",
+        loader: async ({ params }) =>
+          await fetch(`http://localhost:4000/reviews/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <ReviewDetails />
           </PrivateRoute>
         ),
       },
