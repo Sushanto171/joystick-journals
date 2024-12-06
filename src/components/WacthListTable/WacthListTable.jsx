@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { deleteAlert } from "../alert/deleteAlert";
 
 const WatchListTable = ({ data }) => {
+  const [tick, setTick] = useState(false);
   const { i, list } = data;
   const {
     gameTitle,
@@ -53,7 +55,18 @@ const WatchListTable = ({ data }) => {
       <td className="leading-relaxed">{description}</td>
       <th>
         <div className="flex gap-2">
-          <button className="btn btn-outline btn-xs text-success">Done</button>
+          <button
+            onClick={() => setTick(true)}
+            className={`${
+              tick && "btn-disabled"
+            } btn btn-outline btn-xs text-success`}
+          >
+            {tick ? (
+              <IoMdCheckmarkCircleOutline className="text-success" />
+            ) : (
+              "Done"
+            )}
+          </button>
           <button
             onClick={() => deleteHandler(_id, data, "formWatch")}
             className="btn btn-outline btn-xs text-error"

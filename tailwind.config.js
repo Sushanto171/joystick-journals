@@ -2,11 +2,11 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    // colors: {
-    //   customGreen: "#28AE4E",
-    //   secondaryGreen: "#4ade80",
-    // },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "error-page-bg": "url('./src/assets/404_page.png')",
+      },
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
