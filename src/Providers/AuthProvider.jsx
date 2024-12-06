@@ -28,7 +28,6 @@ const AuthProvider = ({ children }) => {
       unSubscribe();
     };
   }, []);
-
   // providers
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();

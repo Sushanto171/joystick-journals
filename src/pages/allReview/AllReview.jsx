@@ -4,12 +4,10 @@ import AllReviewsCard from "../../components/allReviewsCard/allReviewsCard";
 
 const AllReview = () => {
   const reviews = useLoaderData();
-  console.log(reviews[0]);
 
   return (
     <div className="w-10/12 mx-auto my-5">
       <h2 className="text-3xl text-center my-8 font-semibold">
-        {" "}
         All Game Reviews: Explore the Best in Gaming
       </h2>
       <div className="grid md:grid-cols-2 gap-10">

@@ -49,9 +49,12 @@ const Navbar = () => {
   ));
   useEffect(() => {
     fetch(`http://localhost:4000/users/${user?.email}`)
-      .then((res) => user && res.json())
+      .then((res) => res.json())
       .then((data) => {
-        setUser(data);
+        if (data) setUser(data);
+      })
+      .catch((error) => {
+        // console.error("Error fetching user data:", error);
       });
   }, []);
 

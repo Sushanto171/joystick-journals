@@ -20,7 +20,6 @@ const LogIn = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log({ email, password });
     signInWithEmailPass(email, password)
       .then((res) => {
         const user = res.user;

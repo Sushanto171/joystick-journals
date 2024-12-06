@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { IoGameController } from "react-icons/io5";
 import { useLoaderData } from "react-router";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { successAlert } from "../alert/SuccessAlert";
 
 const ReviewDetails = () => {
+  const { user } = useContext(AuthContext);
   const review = useLoaderData();
   const {
     gameTitle,
@@ -13,8 +17,34 @@ const ReviewDetails = () => {
     userEmail,
     userName,
     publishingYear,
+    _id,
   } = review;
+  // console.log(_id);
 
+  // watchListHandler
+  const watchListHandler = () => {
+    const watchListData = {
+      email: user.email,
+      user: user.name,
+      id: _id,
+    };
+    fetch(`http://localhost:4000/watchList/${user.email}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(watchListData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        successAlert(
+          data.message,
+          `${
+            data.message === "ID already exists in watchlist!"
+              ? "warning"
+              : "success"
+          }`
+        );
+      });
+  };
   return (
     <div className="card mx-auto h-full w-10/12 bg-base-200 shadow rounded-lg overflow-hidden my-10">
       <main className="p-2 sm:p-5 mb-5 flex flex-col">
@@ -63,7 +93,10 @@ const ReviewDetails = () => {
           </p>
         </div>
         <div className="flex space-x-4 mt-8">
-          <button className="btn bg-[#4ade80] hover:bg-[#28AE4E] font-bold text-white">
+          <button
+            onClick={watchListHandler}
+            className="btn bg-[#4ade80] hover:bg-[#28AE4E] font-bold text-white"
+          >
             Add to Game WatchList <IoGameController size={25} />
           </button>
         </div>
