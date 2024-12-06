@@ -6,7 +6,7 @@ const AllReview = () => {
   const reviews = useLoaderData();
 
   return (
-    <div className="w-10/12 mx-auto my-5">
+    <div className=" mx-auto my-5">
       <h2 className="text-3xl text-center my-8 font-semibold">
         All Game Reviews: Explore the Best in Gaming
       </h2>

@@ -14,10 +14,15 @@ const GameWatchList = () => {
   }, []);
 
   if (watchListIDs === undefined) {
-    return <h1>No data found.</h1>;
+    return <h1 className="my-10 ml-10 text-3xl">No data found.</h1>;
   }
 
-  return <div>GameWatchList :{watchListIDs.length}</div>;
+  return (
+    <>
+      <div>GameWatchList :{watchListIDs.length}</div>
+      <div></div>
+    </>
+  );
 };
 
 export default GameWatchList;

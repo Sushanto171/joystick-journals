@@ -28,7 +28,9 @@ const LayOut = () => {
       <Navbar />
 
       {/* dynamic */}
-      <Outlet />
+      <div className="max-w-screen-lg mx-auto">
+        <Outlet />
+      </div>
 
       {/* footer */}
       <Footer />

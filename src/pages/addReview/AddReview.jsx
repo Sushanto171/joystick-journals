@@ -61,7 +61,7 @@ const AddReview = () => {
           informed decisions
         </h2>
       </div>
-      <div className="card bg-base-100 max-w-4xl mx-auto shrink-0 shadow rounded-md border-b-4 hover:border-[#28AE4E] hover:shadow-2xl">
+      <div className="card bg-base-100 shrink-0 shadow rounded-md border-b-4 hover:border-[#28AE4E] hover:shadow-2xl">
         <form onSubmit={addReviewHandler} className="card-body">
           <div className="grid grid-cols-2 gap-4">
             <div className="form-control">
@@ -110,10 +110,9 @@ const AddReview = () => {
                   <select
                     name="genres"
                     className="select select-bordered w-full max-w-xs"
+                    defaultValue="Select one genres"
                   >
-                    <option disabled selected>
-                      Select one genres
-                    </option>
+                    <option disabled>Select one genres</option>
                     {genresArray.map((genres) => (
                       <option key={genres}>{genres}</option>
                     ))}
@@ -128,10 +127,9 @@ const AddReview = () => {
                   <select
                     name="rating"
                     className="select select-bordered w-full max-w-xs"
+                    defaultValue="Select an rating"
                   >
-                    <option disabled selected>
-                      Select an rating
-                    </option>
+                    <option disabled>Select an rating</option>
                     {ratingArray.map((rating) => (
                       <option key={rating}>{rating}</option>
                     ))}
@@ -146,10 +144,9 @@ const AddReview = () => {
                   <select
                     name="publishingYear"
                     className="select select-bordered w-full max-w-xs"
+                    defaultValue="Select year"
                   >
-                    <option disabled selected>
-                      Select year
-                    </option>
+                    <option disabled>Select year</option>
                     {publishingYearArray.map((year) => (
                       <option key={year}>{year}</option>
                     ))}
@@ -167,7 +164,8 @@ const AddReview = () => {
                 className="input input-bordered"
                 required
                 name="userName"
-                value={user?.name}
+                readOnly
+                defaultValue={user?.name}
               />
             </div>
             <div className="form-control">
@@ -180,7 +178,8 @@ const AddReview = () => {
                 className="input input-bordered"
                 required
                 name="userEmail"
-                value={user?.email}
+                defaultValue={user?.email}
+                readOnly
               />
             </div>
           </div>
