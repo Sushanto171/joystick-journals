@@ -19,6 +19,11 @@ const MyReview = () => {
   }
   return (
     <>
+      <div className="text-center my-8">
+        <h3 className="text-2xl md:text-3xl font-semibold underline ">
+          My Reviews
+        </h3>
+      </div>
       <div className="my-10 overflow-x-auto overscroll-y-auto">
         <table className="table min-w-[450px]  ">
           {/* head */}
@@ -32,7 +37,10 @@ const MyReview = () => {
             </tr>
           </thead>
           {myReviewList.map((review, i) => (
-            <MyReviewTable review={review} key={review._id} i={i} />
+            <MyReviewTable
+              data={{ review, i, myReviewList, setMyReviewList }}
+              key={review._id}
+            />
           ))}
         </table>
       </div>
