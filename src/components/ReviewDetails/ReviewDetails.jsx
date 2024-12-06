@@ -27,6 +27,7 @@ const ReviewDetails = () => {
       email: user.email,
       user: user.name,
       id: _id,
+      isComplete: false,
     };
     fetch(`http://localhost:4000/watchList/${user.email}`, {
       method: "PUT",

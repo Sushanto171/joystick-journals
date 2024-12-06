@@ -14,8 +14,8 @@ const MyReviewTable = ({ data }) => {
     _id,
   } = review;
 
-  const deleteHandler = async (id, data) => {
-    deleteAlert(id, data);
+  const deleteHandler = async (id, data, condition) => {
+    deleteAlert(id, data, condition);
   };
   return (
     <tbody className={`${i % 2 === 0 || "bg-base-200"}`}>
@@ -52,7 +52,7 @@ const MyReviewTable = ({ data }) => {
               <button className="btn btn-outline btn-xs block">Edit</button>
             </Link>
             <button
-              onClick={() => deleteHandler(_id, data)}
+              onClick={() => deleteHandler(_id, data, "formReview")}
               className="btn btn-outline text-error btn-xs  block"
             >
               Delete

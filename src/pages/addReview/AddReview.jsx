@@ -185,7 +185,7 @@ const AddReview = () => {
           </div>
           <div className="form-control mt-6">
             <button className="btn bg-[#4ade80] hover:bg-[#28AE4E] font-bold text-white">
-              Add Review
+              Submit Review
             </button>
           </div>
         </form>

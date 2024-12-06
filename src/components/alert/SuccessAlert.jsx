@@ -6,8 +6,8 @@ export const successAlert = (text, icon = "success") => {
     title: text,
     showConfirmButton: false,
     background: "#4d4d4d",
-    color: "white",
     backdrop: "#b8f0c858",
+    color: "white",
     timer: 1500,
   });
 };
