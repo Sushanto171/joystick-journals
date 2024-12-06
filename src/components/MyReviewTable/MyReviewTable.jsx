@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import { deleteAlert } from "../alert/deleteAlert";
 
 const MyReviewTable = ({ data }) => {
@@ -41,13 +42,15 @@ const MyReviewTable = ({ data }) => {
           </div>
         </td>
         <td className=" hidden md:block">
-          {description.slice(0, 150)}..{" "}
+          {description.slice(0, 150)}..
           <button className="underline">view</button>
         </td>
         <td className=" ">{rating}.0 Rating</td>
         <td className="">
           <div className="flex gap-1">
-            <button className="btn btn-outline btn-xs block">Edit</button>
+            <Link to={`/update-review/${_id}`}>
+              <button className="btn btn-outline btn-xs block">Edit</button>
+            </Link>
             <button
               onClick={() => deleteHandler(_id, data)}
               className="btn btn-outline text-error btn-xs  block"
