@@ -17,7 +17,7 @@ const HighestRatedCard = ({ list }) => {
         <h3 className="text-xl font-semibold mb-2">{gameTitle}</h3>
         <p className="text-gray-600 text-sm mb-4">{gameDescription}</p>
         <div className="flex justify-between items-center">
-          <span className="text-yellow-500 text-lg">{rating} / 5</span>
+          <span className="text-yellow-500 text-lg">{rating} / 5 rating</span>
           <button
             onClick={() => navigate(`/review-details/${_id}`)}
             className="btn mt-6 text-white bg-[#4ade80] hover:bg-[#28AE4E] font-bold border-0"

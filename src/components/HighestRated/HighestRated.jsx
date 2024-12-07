@@ -10,12 +10,12 @@ const HighestRated = () => {
         Array.isArray(data) && setHighest(data);
       });
   }, []);
-  console.log(highest);
   return (
-    <div className="container mx-auto px-4 mt-8">
-      <h2 className="text-3xl font-semibold mb-6 text-center">
+    <div className="container mx-auto px-4 mt-12 bg-base-200 rounded-md pb-10">
+      <h2 className=" text-2xl sm:text-3xl font-semibold text-center pt-4">
         Highest Rated Games
       </h2>
+      <div className="border mb-12 max-w-72 mt-2 mx-auto"></div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {highest.map((list) => (
           <HighestRatedCard key={list._id} list={list} />
