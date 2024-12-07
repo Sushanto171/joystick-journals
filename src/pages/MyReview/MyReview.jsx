@@ -1,22 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Triangle } from "react-loader-spinner";
 import { AuthContext } from "../../Providers/AuthProvider";
 import MyReviewTable from "../../components/MyReviewTable/MyReviewTable";
 
 const MyReview = () => {
-  const { user, loading, setLoading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [myReviewList, setMyReviewList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    fetch(
-      `https://joystick-journals-server.vercel.app/reviews?userEmail=${user.email}`
-    )
+    fetch(`http://localhost:4000/reviews?userEmail=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setMyReviewList(data);
       })
       .catch((error) => {
-        console.error("Error fetching reviews:", error);
+        // console.error("Error fetching reviews:", error);
       })
       .finally(() => {
         setLoading(false);

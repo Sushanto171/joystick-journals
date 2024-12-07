@@ -16,7 +16,6 @@ const WatchListTable = ({ data }) => {
     publishingYear,
     _id,
   } = list;
-
   const deleteHandler = async (id, data, condition) => {
     deleteAlert(id, data, condition);
   };
@@ -27,7 +26,7 @@ const WatchListTable = ({ data }) => {
         <div className="flex items-center gap-3">
           <div className="avatar">
             <div className="mask mask-squircle h-28 w-28">
-              <img src={thumbnail} alt={gameTitle.slice(0, 5)} />
+              <img src={thumbnail} alt={gameTitle} />
             </div>
           </div>
           <div>

@@ -6,7 +6,7 @@ const AddReview = () => {
   const { user, setUser, loading, setLoading } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`https://joystick-journals-server.vercel.app/users/${user?.email}`)
+    fetch(`http://localhost:4000/users/${user?.email}`)
       .then((res) => user && res.json())
       .then((data) => {
         setUser(data);
@@ -42,7 +42,7 @@ const AddReview = () => {
     };
 
     // add data to database
-    fetch("https://joystick-journals-server.vercel.app/reviews", {
+    fetch("http://localhost:4000/reviews", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(review),

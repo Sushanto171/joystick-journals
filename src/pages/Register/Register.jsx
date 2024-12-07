@@ -75,7 +75,7 @@ const Register = () => {
     // user create
     createUser(email, password)
       .then(() => {
-        fetch(`https://joystick-journals-server.vercel.app/users/${email}`, {
+        fetch(`http://localhost:4000/users/${email}`, {
           method: "PUT",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(data),
@@ -108,7 +108,7 @@ const Register = () => {
         const email = res.user.email;
         const photo = res.user.photoURL;
         const data = { name, email, photo };
-        fetch(`https://joystick-journals-server.vercel.app/users/${email}`, {
+        fetch(`http://localhost:4000/users/${email}`, {
           method: "PUT",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(data),
@@ -137,7 +137,7 @@ const Register = () => {
         const email = res.user.email;
         const photo = res.user.photoURL;
         const data = { name, email, photo };
-        fetch(`https://joystick-journals-server.vercel.app/users/${email}`, {
+        fetch(`http://localhost:4000/users/${email}`, {
           method: "PUT",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(data),
