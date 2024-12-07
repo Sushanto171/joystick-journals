@@ -2,7 +2,7 @@ import { FaFacebook, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className="bg-[#28313C] mt-10 pt-10 pb-5 flex justify-center flex-col">
+    <div className="bg-black/80 mt-10 pt-10 pb-5 flex justify-center flex-col">
       <div className="flex justify-center text-center text-white flex-col items-center">
         <h2 className="text-3xl font-semibold my-2">Let❜s connect!</h2>
         <p className="opacity-60 w-10/12 mx-auto">
