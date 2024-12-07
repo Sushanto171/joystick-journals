@@ -48,7 +48,7 @@ const Navbar = () => {
     </NavLink>
   ));
   useEffect(() => {
-    fetch(`http://localhost:4000/users/${user?.email}`)
+    fetch(`https://joystick-journals-server.vercel.app/users/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         if (data) setUser(data);

@@ -3,10 +3,10 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { successAlert } from "../../components/alert/SuccessAlert";
 
 const AddReview = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, loading, setLoading } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/users/${user?.email}`)
+    fetch(`https://joystick-journals-server.vercel.app/users/${user?.email}`)
       .then((res) => user && res.json())
       .then((data) => {
         setUser(data);
@@ -42,7 +42,7 @@ const AddReview = () => {
     };
 
     // add data to database
-    fetch("http://localhost:4000/reviews", {
+    fetch("https://joystick-journals-server.vercel.app/reviews", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(review),
@@ -53,6 +53,22 @@ const AddReview = () => {
         data.insertedId && form.reset();
       });
   };
+
+  if (loading) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <Triangle
+          visible={true}
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="triangle-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>
+    );
+  }
   return (
     <div className="my-5">
       <div className="w-10/12 max-w-4xl mx-auto text-center my-10">

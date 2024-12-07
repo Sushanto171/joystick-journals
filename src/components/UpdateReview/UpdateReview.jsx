@@ -48,7 +48,7 @@ const UpdateReview = () => {
     };
     console.log(updatedReview);
 
-    fetch(`http://localhost:4000/reviews/${_id}`, {
+    fetch(`https://joystick-journals-server.vercel.app/reviews/${_id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(updatedReview),

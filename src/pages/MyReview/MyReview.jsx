@@ -3,17 +3,40 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import MyReviewTable from "../../components/MyReviewTable/MyReviewTable";
 
 const MyReview = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading, setLoading } = useContext(AuthContext);
   const [myReviewList, setMyReviewList] = useState([]);
 
   useEffect(() => {
-    fetch(` http://localhost:4000/reviews?userEmail=${user.email}`)
+    setLoading(true);
+    fetch(
+      `https://joystick-journals-server.vercel.app/reviews?userEmail=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setMyReviewList(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching reviews:", error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-  }, []);
-
+  }, [user.email, setLoading]);
+  if (loading) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <Triangle
+          visible={true}
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="triangle-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>
+    );
+  }
   if (myReviewList.length === 0) {
     return <h1 className="my-10 ml-10 text-3xl">No data found.</h1>;
   }

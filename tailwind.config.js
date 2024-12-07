@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        "error-page-bg": "url('./src/assets/404_page.png')",
+        "error-page-bg": "url('/404_page.png')",
       },
     },
   },

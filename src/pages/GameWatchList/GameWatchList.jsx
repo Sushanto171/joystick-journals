@@ -7,10 +7,14 @@ const GameWatchList = () => {
   const [watchListIDs, setWatchListIDs] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/watchList/${user?.email}`).then((res) =>
+    fetch(
+      `https://joystick-journals-server.vercel.app/watchList/${user?.email}`
+    ).then((res) =>
       res.json().then((data) => {
         const arrayOfIds = data.ids.join(",");
-        fetch(`http://localhost:4000/reviews?arrayOfIds=${arrayOfIds}`)
+        fetch(
+          `https://joystick-journals-server.vercel.app/reviews?arrayOfIds=${arrayOfIds}`
+        )
           .then((res) => res.json())
           .then((data) => {
             setWatchListIDs(data);
