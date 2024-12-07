@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 import AllReviewsCard from "../../components/allReviewsCard/allReviewsCard";
 
 const AllReview = () => {
-  const reviews = useLoaderData();
+  const data = useLoaderData();
+  const [reviews, setReviews] = useState([]);
+  useEffect(() => {
+    if (Array.isArray(data)) {
+      setReviews(data);
+    }
+  }, [data]);
 
   if (reviews.length === 0) {
     return <h1 className="my-10 ml-10 text-3xl">No data found.</h1>;

@@ -1,0 +1,9 @@
+.carousel .carousel-slider {
+  max-height: 400px;
+}
+
+.carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

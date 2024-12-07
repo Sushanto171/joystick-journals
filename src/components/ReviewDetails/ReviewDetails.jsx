@@ -39,7 +39,7 @@ const ReviewDetails = () => {
         successAlert(
           data.message,
           `${
-            data.message === "ID already exists in watchlist!"
+            data.message === "Game already exists in watchlist!"
               ? "warning"
               : "success"
           }`

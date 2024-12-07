@@ -23,14 +23,16 @@ const LogIn = () => {
     signInWithEmailPass(email, password)
       .then((res) => {
         const user = res.user;
-        fetch(`http://localhost:4000/users/${user?.email}`)
-          .then((res) => user && res.json())
-          .then((data) => {
-            setUser(data);
-            navigate("/");
-            form.reset();
-            successAlert("Log in success!");
-          });
+        if (user) {
+          navigate("/");
+          successAlert("Log in success!");
+          form.reset();
+          fetch(`http://localhost:4000/users/${user?.email}`)
+            .then((res) => user && res.json())
+            .then((data) => {
+              setUser(data);
+            });
+        }
       })
       .catch((error) => {
         setError(error.code);
@@ -43,20 +45,21 @@ const LogIn = () => {
     setError("");
     logInWithGoogle()
       .then((res) => {
-        const name = res.user.displayName;
-        const email = res.user.email;
-        const photo = res.user.photoURL;
-        const data = { name, email, photo };
-        fetch(`http://localhost:4000/users/${email}`, {
-          method: "PUT",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(data),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            successAlert("Log in success");
-            navigate("/");
-          });
+        if (res.user) {
+          const name = res.user.displayName;
+          const email = res.user.email;
+          const photo = res.user.photoURL;
+          const data = { name, email, photo };
+          successAlert("Log in success");
+          navigate("/");
+          fetch(`http://localhost:4000/users/${email}`, {
+            method: "PUT",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(data),
+          })
+            .then((res) => res.json())
+            .then((data) => {});
+        }
       })
       .catch((error) => {
         setError(
@@ -72,20 +75,21 @@ const LogIn = () => {
     setError("");
     logInWithGithub()
       .then((res) => {
-        const name = res.user.displayName;
-        const email = res.user.email;
-        const photo = res.user.photoURL;
-        const data = { name, email, photo };
-        fetch(`http://localhost:4000/users/${email}`, {
-          method: "PUT",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(data),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            successAlert("Log in success");
-            navigate("/");
-          });
+        if (res.user) {
+          const name = res.user.displayName;
+          const email = res.user.email;
+          const photo = res.user.photoURL;
+          successAlert("Log in success");
+          navigate("/");
+          const data = { name, email, photo };
+          fetch(`http://localhost:4000/users/${email}`, {
+            method: "PUT",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(data),
+          })
+            .then((res) => res.json())
+            .then((data) => {});
+        }
       })
       .catch((error) => {
         setError(

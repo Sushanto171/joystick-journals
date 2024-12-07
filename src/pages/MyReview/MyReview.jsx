@@ -9,17 +9,19 @@ const MyReview = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/reviews?userEmail=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setMyReviewList(data);
-      })
-      .catch((error) => {
-        // console.error("Error fetching reviews:", error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    if (user?.email) {
+      fetch(`http://localhost:4000/reviews?userEmail=${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setMyReviewList(data);
+        })
+        .catch((error) => {
+          // console.error("Error fetching reviews:", error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   }, [user.email, setLoading]);
   if (loading) {
     return (

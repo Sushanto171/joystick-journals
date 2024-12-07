@@ -9,32 +9,34 @@ const GameWatchList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/watchList/${user?.email}`)
+    if (!user?.email) {
+      setLoading(false);
+      return;
+    }
+
+    // Fetching the watchlist
+    fetch(`http://localhost:4000/watchList/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        if (
-          !data.ids === undefined ||
-          !data.message === "No data found" ||
-          data.ids.length > 0
-        ) {
-          const ids = data?.ids;
-          const arrayOfIds = ids.join(",");
+        if (data?.ids?.length > 0) {
+          const arrayOfIds = data.ids.join(",");
+
           fetch(`http://localhost:4000/reviews?arrayOfIds=${arrayOfIds}`)
             .then((res) => res.json())
-            .then((data) => {
-              console.log(data);
-              setWatchListIDs(data);
+            .then((reviews) => {
+              setWatchListIDs(reviews);
             })
-            .finally(() => {
-              setLoading(false);
-            });
+            .finally(() => setLoading(false));
         } else {
-          setLoading(false);
           setWatchListIDs([]);
+          setLoading(false);
         }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false);
       });
-  }, []);
+  }, [user?.email]);
 
   if (loading) {
     return (

@@ -1,17 +1,22 @@
 import React, { useContext, useEffect } from "react";
-import { AuthContext } from "../../Providers/AuthProvider";
 import { successAlert } from "../../components/alert/SuccessAlert";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const AddReview = () => {
-  const { user, setUser, loading, setLoading } = useContext(AuthContext);
-
+  const { user, setUser } = useContext(AuthContext);
   useEffect(() => {
-    fetch(`http://localhost:4000/users/${user?.email}`)
-      .then((res) => user && res.json())
-      .then((data) => {
-        setUser(data);
-      });
-  }, []);
+    if (user?.email) {
+      fetch(`http://localhost:4000/users/${user?.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data) setUser(data);
+        })
+        .catch((error) => {
+          // console.error("Error fetching user data:", error);
+        });
+    }
+  }, [user?.email]);
+
   const genresArray = ["Action", "RPG", "Adventure"];
   const ratingArray = [1, 2, 3, 4, 5];
   const publishingYearArray = [
@@ -54,21 +59,6 @@ const AddReview = () => {
       });
   };
 
-  if (loading) {
-    return (
-      <div className="h-screen flex justify-center items-center">
-        <Triangle
-          visible={true}
-          height="80"
-          width="80"
-          color="#4fa94d"
-          ariaLabel="triangle-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-        />
-      </div>
-    );
-  }
   return (
     <div className="my-5">
       <div className="w-10/12 max-w-4xl mx-auto text-center my-10">

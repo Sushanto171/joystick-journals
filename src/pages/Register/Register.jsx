@@ -75,6 +75,9 @@ const Register = () => {
     // user create
     createUser(email, password)
       .then(() => {
+        successAlert("Register Success!");
+        form.reset();
+        navigate("/");
         fetch(`http://localhost:4000/users/${email}`, {
           method: "PUT",
           headers: { "content-type": "application/json" },
@@ -82,10 +85,7 @@ const Register = () => {
         })
           .then((res) => res.json())
           .then(() => {
-            successAlert("Register Success!");
             setUser(data);
-            form.reset();
-            navigate("/");
           });
       })
       .catch((error) => {
@@ -104,6 +104,8 @@ const Register = () => {
     setError("");
     logInWithGoogle()
       .then((res) => {
+        successAlert("Log in success");
+        navigate("/");
         const name = res.user.displayName;
         const email = res.user.email;
         const photo = res.user.photoURL;
@@ -114,10 +116,7 @@ const Register = () => {
           body: JSON.stringify(data),
         })
           .then((res) => res.json())
-          .then((data) => {
-            successAlert("Log in success");
-            navigate("/");
-          });
+          .then((data) => {});
       })
       .catch((error) => {
         setError(
@@ -133,6 +132,8 @@ const Register = () => {
     setError("");
     logInWithGithub()
       .then((res) => {
+        successAlert("Log in success");
+        navigate("/");
         const name = res.user.displayName;
         const email = res.user.email;
         const photo = res.user.photoURL;
@@ -143,10 +144,7 @@ const Register = () => {
           body: JSON.stringify(data),
         })
           .then((res) => res.json())
-          .then((data) => {
-            successAlert("Log in success");
-            navigate("/");
-          });
+          .then((data) => {});
       })
       .catch((error) => {
         setError(
