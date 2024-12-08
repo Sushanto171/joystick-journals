@@ -7,8 +7,8 @@ const Banner = () => {
   return (
     <div className="relative">
       <div className="h-full w-full absolute bg-black/40 z-10 flex items-center justify-center ">
-        <div className=" w-4/5 relative">
-          <h1 className="text-left text-xl md:text-4xl font-bold absolute -top-5 sm:-top-20">
+        <div className=" w-4/5 relative ">
+          <h1 className="text-left text-xl md:text-4xl font-bold absolute -top-5 sm:-top-20 text-white">
             <Typewriter
               cursor
               cursorBlinking

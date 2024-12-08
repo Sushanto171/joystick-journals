@@ -18,6 +18,7 @@ const AllReview = () => {
     return <h1 className="my-10 ml-10 text-3xl">No data found.</h1>;
   }
 
+  // short
   const sortHandler = (condition) => {
     setLoading(true);
     fetch(`http://localhost:4000/reviews?sort=${condition}`)
@@ -30,6 +31,22 @@ const AllReview = () => {
         setLoading(false);
       });
   };
+
+  // filter
+  const filterHandler = (condition) => {
+    console.log(condition);
+    setLoading(true);
+    fetch(`http://localhost:4000/reviews?filter=${condition}`)
+      .then((res) => res.json())
+      .then((data) => {
+        Array.isArray(data);
+        setReviews(data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   if (loading) {
     return (
       <div className="h-screen flex justify-center items-center">
@@ -48,6 +65,31 @@ const AllReview = () => {
   return (
     <div className=" mx-auto my-5">
       <div className="flex justify-end">
+        <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button" className="btn m-1">
+            Filter by Genres
+          </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+          >
+            <li className="mb-2">
+              <button onClick={() => filterHandler("Action")}>
+                Action <IoIosArrowRoundUp />
+              </button>
+            </li>
+            <li>
+              <button onClick={() => filterHandler("RPG")}>
+                RPG <IoIosArrowRoundUp />
+              </button>
+            </li>
+            <li>
+              <button onClick={() => filterHandler("Adventure")}>
+                Adventure <IoIosArrowRoundUp />
+              </button>
+            </li>
+          </ul>
+        </div>
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn m-1">
             Sort

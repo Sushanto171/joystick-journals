@@ -12,7 +12,6 @@ const LogIn = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   // const location = useLocation();
-  // console.log(location);
 
   const logInFormHandler = (e) => {
     setError("");

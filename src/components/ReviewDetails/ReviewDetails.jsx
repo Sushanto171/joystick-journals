@@ -19,7 +19,6 @@ const ReviewDetails = () => {
     publishingYear,
     _id,
   } = review;
-  // console.log(_id);
 
   // watchListHandler
   const watchListHandler = () => {

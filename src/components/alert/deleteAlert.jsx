@@ -60,9 +60,6 @@ export const deleteAlert = (id, data, condition) => {
             ids: remainIds,
             isComplete: false,
           };
-          console.log(updateWatchListData);
-
-          // console.log(updateWatchListData);
 
           fetch(`http://localhost:4000/updateWatchList/${user.email}`, {
             method: "PUT",
