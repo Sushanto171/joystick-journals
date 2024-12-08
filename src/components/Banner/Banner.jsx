@@ -1,7 +1,10 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Typewriter } from "react-simple-typewriter";
-import img from "./../../../public/PUBG.webp";
+import img from "./../../../public/image.jpg";
+import img1 from "./../../../public/image1.jpg";
+import img2 from "./../../../public/images.jpg";
+import img3 from "./../../../public/img.png";
 import "./banner.css";
 const Banner = () => {
   return (
@@ -40,22 +43,16 @@ const Banner = () => {
         infiniteLoop={true}
       >
         <div>
-          <img src={img} alt="Slide 1" />
+          <img src={img3} alt="Slide 1" />
         </div>
         <div>
-          <img src={img} alt="Slide 2" />
+          <img src={img1} alt="Slide 2" />
         </div>
         <div>
-          <img src={img} alt="Slide 3" />
+          <img src={img2} alt="Slide 3" />
         </div>
         <div>
           <img src={img} alt="Slide 4" />
-        </div>
-        <div>
-          <img src={img} alt="Slide 5" />
-        </div>
-        <div>
-          <img src={img} alt="Slide 6" />
         </div>
       </Carousel>
     </div>

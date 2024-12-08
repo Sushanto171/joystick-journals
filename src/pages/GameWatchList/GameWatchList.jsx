@@ -15,13 +15,15 @@ const GameWatchList = () => {
     }
 
     // Fetching the watchlist
-    fetch(`http://localhost:4000/watchList/${user.email}`)
+    fetch(`https://joystick-journals-server.vercel.app/watchList/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         if (data?.ids?.length > 0) {
           const arrayOfIds = data.ids.join(",");
 
-          fetch(`http://localhost:4000/reviews?arrayOfIds=${arrayOfIds}`)
+          fetch(
+            `https://joystick-journals-server.vercel.app/reviews?arrayOfIds=${arrayOfIds}`
+          )
             .then((res) => res.json())
             .then((reviews) => {
               setWatchListIDs(reviews);

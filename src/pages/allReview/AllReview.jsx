@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { IoIosArrowRoundUp } from "react-icons/io";
+import { LuArrowDownUp } from "react-icons/lu";
 import { Triangle } from "react-loader-spinner";
 import { useLoaderData } from "react-router";
+import { successAlert } from "../../components/alert/SuccessAlert";
 import AllReviewsCard from "../../components/allReviewsCard/allReviewsCard";
 
 const AllReview = () => {
@@ -21,11 +22,14 @@ const AllReview = () => {
   // short
   const sortHandler = (condition) => {
     setLoading(true);
-    fetch(`http://localhost:4000/reviews?sort=${condition}`)
+    fetch(
+      `https://joystick-journals-server.vercel.app/reviews?sort=${condition}`
+    )
       .then((res) => res.json())
       .then((data) => {
         Array.isArray(data);
         setReviews(data);
+        successAlert(`Sorted ${condition} success!`);
       })
       .finally(() => {
         setLoading(false);
@@ -34,13 +38,15 @@ const AllReview = () => {
 
   // filter
   const filterHandler = (condition) => {
-    console.log(condition);
     setLoading(true);
-    fetch(`http://localhost:4000/reviews?filter=${condition}`)
+    fetch(
+      `https://joystick-journals-server.vercel.app/reviews?filter=${condition}`
+    )
       .then((res) => res.json())
       .then((data) => {
         Array.isArray(data);
         setReviews(data);
+        successAlert(`Filter by ${condition} success!`);
       })
       .finally(() => {
         setLoading(false);
@@ -67,45 +73,39 @@ const AllReview = () => {
       <div className="flex justify-end">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn m-1">
-            Filter by Genres
+            Filter by Genres <LuArrowDownUp />
           </div>
           <ul
             tabIndex={0}
             className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
           >
             <li className="mb-2">
-              <button onClick={() => filterHandler("Action")}>
-                Action <IoIosArrowRoundUp />
-              </button>
+              <button onClick={() => filterHandler("Action")}>Action</button>
             </li>
             <li>
-              <button onClick={() => filterHandler("RPG")}>
-                RPG <IoIosArrowRoundUp />
-              </button>
+              <button onClick={() => filterHandler("RPG")}>RPG</button>
             </li>
             <li>
               <button onClick={() => filterHandler("Adventure")}>
-                Adventure <IoIosArrowRoundUp />
+                Adventure
               </button>
             </li>
           </ul>
         </div>
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn m-1">
-            Sort
+            Sort <LuArrowDownUp />
           </div>
           <ul
             tabIndex={0}
             className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
           >
             <li className="mb-2">
-              <button onClick={() => sortHandler("rating")}>
-                Rating <IoIosArrowRoundUp />
-              </button>
+              <button onClick={() => sortHandler("rating")}>Rating</button>
             </li>
             <li>
               <button onClick={() => sortHandler("publishingYear")}>
-                Publishing Year <IoIosArrowRoundUp />
+                Publishing Year
               </button>
             </li>
           </ul>

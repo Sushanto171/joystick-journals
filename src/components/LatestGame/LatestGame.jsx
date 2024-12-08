@@ -4,7 +4,7 @@ import Marquee from "react-fast-marquee";
 const LatestGames = () => {
   const [highest, setHighest] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:4000/reviews`)
+    fetch(`https://joystick-journals-server.vercel.app/reviews`)
       .then((res) => res.json())
       .then((data) => {
         Array.isArray(data) && setHighest(data);

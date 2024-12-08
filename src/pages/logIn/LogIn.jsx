@@ -26,7 +26,9 @@ const LogIn = () => {
           navigate("/");
           successAlert("Log in success!");
           form.reset();
-          fetch(`http://localhost:4000/users/${user?.email}`)
+          fetch(
+            `https://joystick-journals-server.vercel.app/users/${user?.email}`
+          )
             .then((res) => user && res.json())
             .then((data) => {
               setUser(data);
@@ -51,7 +53,7 @@ const LogIn = () => {
           const data = { name, email, photo };
           successAlert("Log in success");
           navigate("/");
-          fetch(`http://localhost:4000/users/${email}`, {
+          fetch(`https://joystick-journals-server.vercel.app/users/${email}`, {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),
@@ -81,7 +83,7 @@ const LogIn = () => {
           successAlert("Log in success");
           navigate("/");
           const data = { name, email, photo };
-          fetch(`http://localhost:4000/users/${email}`, {
+          fetch(`https://joystick-journals-server.vercel.app/users/${email}`, {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),
