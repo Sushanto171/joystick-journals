@@ -30,7 +30,7 @@ export const deleteAlert = (id, data, condition) => {
     .then((result) => {
       if (result.isConfirmed) {
         if (condition === "formReview") {
-          fetch("https://joystick-journals-server.vercel.app", {
+          fetch("http://localhost:4000", {
             method: "DELETE",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({ id: id }),

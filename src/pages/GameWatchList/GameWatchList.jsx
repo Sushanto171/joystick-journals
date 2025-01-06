@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Triangle } from "react-loader-spinner";
 import { AuthContext } from "../../Providers/AuthProvider";
 import WatchListTable from "../../components/WacthListTable/WacthListTable";
+import Container from "../../components/shared/Container";
 
 const GameWatchList = () => {
   const { user } = useContext(AuthContext);
@@ -14,16 +15,14 @@ const GameWatchList = () => {
       return;
     }
 
-    // Fetching the watchlist
+    // Fetching the watchList
     fetch(`http://localhost:4000/watchList/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         if (data?.ids?.length > 0) {
           const arrayOfIds = data.ids.join(",");
 
-          fetch(
-            `https://joystick-journals-server.vercel.app?arrayOfIds=${arrayOfIds}`
-          )
+          fetch(`http://localhost:4000/reviews?arrayOfIds=${arrayOfIds}`)
             .then((res) => res.json())
             .then((reviews) => {
               setWatchListIDs(reviews);
@@ -61,7 +60,7 @@ const GameWatchList = () => {
   }
 
   return (
-    <>
+    <Container>
       <div className="text-center my-8">
         <h3 className="text-2xl md:text-3xl font-semibold underline ">
           Game WatchList
@@ -90,7 +89,7 @@ const GameWatchList = () => {
           </table>
         </div>
       </div>
-    </>
+    </Container>
   );
 };
 

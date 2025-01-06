@@ -4,17 +4,17 @@ import Marquee from "react-fast-marquee";
 const LatestGames = () => {
   const [highest, setHighest] = useState([]);
   useEffect(() => {
-    fetch(`https://joystick-journals-server.vercel.app`)
+    fetch(`http://localhost:4000/reviews`)
       .then((res) => res.json())
       .then((data) => {
         Array.isArray(data) && setHighest(data);
       });
   }, []);
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto">
       <h2 className="text-3xl font-semibold text-center ">🎮 Latest Games</h2>
       <div className="border mb-12 max-w-60 mt-2 mx-auto"></div>
-      <div className="border py-2 bg-base-200 rounded-md ">
+      <div className="border py-2 mb-8 rounded-md ">
         <Marquee pauseOnHover={true}>
           {highest.length &&
             highest.slice(0, 6).map((game) => (

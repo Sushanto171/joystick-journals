@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { successAlert } from "../alert/SuccessAlert";
+import Container from "../shared/Container";
 
 const UpdateReview = () => {
   const { user } = useContext(AuthContext);
@@ -47,7 +48,7 @@ const UpdateReview = () => {
       publishingYear,
     };
 
-    fetch(`https://joystick-journals-server.vercel.app/${_id}`, {
+    fetch(`http://localhost:4000/${_id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(updatedReview),
@@ -62,7 +63,7 @@ const UpdateReview = () => {
       });
   };
   return (
-    <div>
+    <Container>
       <div className="my-5">
         <div className="w-10/12 max-w-4xl mx-auto text-center my-10">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold">
@@ -202,7 +203,7 @@ const UpdateReview = () => {
           </form>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

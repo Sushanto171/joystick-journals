@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { successAlert } from "../../components/alert/SuccessAlert";
+import Container from "../../components/shared/Container";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const AddReview = () => {
@@ -47,7 +48,7 @@ const AddReview = () => {
     };
 
     // add data to database
-    fetch("https://joystick-journals-server.vercel.app", {
+    fetch("http://localhost:4000", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(review),
@@ -60,143 +61,145 @@ const AddReview = () => {
   };
 
   return (
-    <div className="my-5">
-      <div className="w-10/12 max-w-4xl mx-auto text-center my-10">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold">
-          Add your review and contribute continuously to help others make
-          informed decisions
-        </h2>
-      </div>
-      <div className="card bg-base-100 shrink-0 shadow rounded-md border-b-4 hover:border-[#28AE4E] hover:shadow-2xl">
-        <form onSubmit={addReviewHandler} className="card-body">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Game Title</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Game title here"
-                className="input input-bordered"
-                required
-                name="gameTitle"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Game cover image</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Photo URL"
-                className="input input-bordered"
-                required
-                name="thumbnail"
-              />
-            </div>
+    <Container>
+      <div className="my-5">
+        <div className="w-10/12 max-w-4xl mx-auto text-center my-10">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold">
+            Add your review and contribute continuously to help others make
+            informed decisions
+          </h2>
+        </div>
+        <div className="card bg-base-100 shrink-0 shadow rounded-md border-b-4 hover:border-[#28AE4E] hover:shadow-2xl">
+          <form onSubmit={addReviewHandler} className="card-body">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Game Title</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Game title here"
+                  className="input input-bordered"
+                  required
+                  name="gameTitle"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Game cover image</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Photo URL"
+                  className="input input-bordered"
+                  required
+                  name="thumbnail"
+                />
+              </div>
 
-            <div className="form-control col-span-2 sm:col-span-1">
-              <label className="form-control">
-                <div className="label">
-                  <span className="label-text">Description</span>
+              <div className="form-control col-span-2 sm:col-span-1">
+                <label className="form-control">
+                  <div className="label">
+                    <span className="label-text">Description</span>
+                  </div>
+                  <textarea
+                    className="textarea textarea-bordered h-36"
+                    placeholder="type review description... "
+                    name="description"
+                  ></textarea>
+                </label>
+              </div>
+              <div className="grid grid-cols-2 gap-4 col-span-2 sm:col-span-1">
+                <div className="form-control">
+                  <label className="">
+                    <div className="label">
+                      <span className="label-text">Genres</span>
+                    </div>
+                    <select
+                      name="genres"
+                      className="select select-bordered w-full max-w-xs"
+                      defaultValue="Select one genres"
+                    >
+                      <option disabled>Select one genres</option>
+                      {genresArray.map((genres) => (
+                        <option key={genres}>{genres}</option>
+                      ))}
+                    </select>
+                  </label>
                 </div>
-                <textarea
-                  className="textarea textarea-bordered h-36"
-                  placeholder="type review description... "
-                  name="description"
-                ></textarea>
-              </label>
-            </div>
-            <div className="grid grid-cols-2 gap-4 col-span-2 sm:col-span-1">
-              <div className="form-control">
-                <label className="">
-                  <div className="label">
-                    <span className="label-text">Genres</span>
-                  </div>
-                  <select
-                    name="genres"
-                    className="select select-bordered w-full max-w-xs"
-                    defaultValue="Select one genres"
-                  >
-                    <option disabled>Select one genres</option>
-                    {genresArray.map((genres) => (
-                      <option key={genres}>{genres}</option>
-                    ))}
-                  </select>
-                </label>
+                <div className="form-control">
+                  <label className="">
+                    <div className="label">
+                      <span className="label-text">Rating</span>
+                    </div>
+                    <select
+                      name="rating"
+                      className="select select-bordered w-full max-w-xs"
+                      defaultValue="Select an rating"
+                    >
+                      <option disabled>Select an rating</option>
+                      {ratingArray.map((rating) => (
+                        <option key={rating}>{rating}</option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+                <div className="form-control">
+                  <label className="">
+                    <div className="label">
+                      <span className="label-text ">Publishing year</span>
+                    </div>
+                    <select
+                      name="publishingYear"
+                      className="select select-bordered w-full max-w-xs"
+                      defaultValue="Select year"
+                    >
+                      <option disabled>Select year</option>
+                      {publishingYearArray.map((year) => (
+                        <option key={year}>{year}</option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
               </div>
               <div className="form-control">
-                <label className="">
-                  <div className="label">
-                    <span className="label-text">Rating</span>
-                  </div>
-                  <select
-                    name="rating"
-                    className="select select-bordered w-full max-w-xs"
-                    defaultValue="Select an rating"
-                  >
-                    <option disabled>Select an rating</option>
-                    {ratingArray.map((rating) => (
-                      <option key={rating}>{rating}</option>
-                    ))}
-                  </select>
+                <label className="label">
+                  <span className="label-text">User Name</span>
                 </label>
+                <input
+                  type="text"
+                  placeholder="User name"
+                  className="input input-bordered"
+                  required
+                  name="userName"
+                  readOnly
+                  defaultValue={user?.name}
+                />
               </div>
               <div className="form-control">
-                <label className="">
-                  <div className="label">
-                    <span className="label-text ">Publishing year</span>
-                  </div>
-                  <select
-                    name="publishingYear"
-                    className="select select-bordered w-full max-w-xs"
-                    defaultValue="Select year"
-                  >
-                    <option disabled>Select year</option>
-                    {publishingYearArray.map((year) => (
-                      <option key={year}>{year}</option>
-                    ))}
-                  </select>
+                <label className="label">
+                  <span className="label-text">User Email</span>
                 </label>
+                <input
+                  type="email"
+                  placeholder="email"
+                  className="input input-bordered"
+                  required
+                  name="userEmail"
+                  defaultValue={user?.email}
+                  readOnly
+                />
               </div>
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">User Name</span>
-              </label>
-              <input
-                type="text"
-                placeholder="User name"
-                className="input input-bordered"
-                required
-                name="userName"
-                readOnly
-                defaultValue={user?.name}
-              />
+            <div className="form-control mt-6">
+              <button className="btn bg-[#4ade80] hover:bg-[#28AE4E] font-bold text-white">
+                Submit Review
+              </button>
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">User Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="email"
-                className="input input-bordered"
-                required
-                name="userEmail"
-                defaultValue={user?.email}
-                readOnly
-              />
-            </div>
-          </div>
-          <div className="form-control mt-6">
-            <button className="btn bg-[#4ade80] hover:bg-[#28AE4E] font-bold text-white">
-              Submit Review
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

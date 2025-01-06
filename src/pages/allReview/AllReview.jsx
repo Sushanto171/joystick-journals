@@ -2,124 +2,126 @@ import React, { useEffect, useState } from "react";
 import { LuArrowDownUp } from "react-icons/lu";
 import { Triangle } from "react-loader-spinner";
 import { useLoaderData } from "react-router";
-import { successAlert } from "../../components/alert/SuccessAlert";
 import AllReviewsCard from "../../components/allReviewsCard/allReviewsCard";
+import Container from "../../components/shared/Container";
 
 const AllReview = () => {
-  const data = useLoaderData();
+  const data = useLoaderData() || [];
   const [loading, setLoading] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const [filter, setFilter] = useState("");
+  const [sort, setSort] = useState("");
+
   useEffect(() => {
     if (Array.isArray(data)) {
       setReviews(data);
     }
   }, [data]);
 
-  if (reviews.length === 0) {
+  const fetchReviews = (queryParam, condition) => {
+    setLoading(true);
+    fetch(`http://localhost:4000/reviews?${queryParam}=${condition}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setReviews(data);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    if (filter) {
+      fetchReviews("filter", filter);
+      if (sort) {
+        fetchReviews("sort", sort);
+      }
+    }
+  }, [filter, sort]);
+
+  if (reviews.length === 0 && !loading) {
     return <h1 className="my-10 ml-10 text-3xl">No data found.</h1>;
   }
 
-  // short
-  const sortHandler = (condition) => {
-    setLoading(true);
-    fetch(
-      `https://joystick-journals-server.vercel.app/reviews?sort=${condition}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        Array.isArray(data);
-        setReviews(data);
-        successAlert(`Sorted ${condition} success!`);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  // filter
-  const filterHandler = (condition) => {
-    setLoading(true);
-    fetch(
-      `https://joystick-journals-server.vercel.app/reviews?filter=${condition}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        Array.isArray(data);
-        setReviews(data);
-        successAlert(`Filter by ${condition} success!`);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  if (loading) {
-    return (
-      <div className="h-screen flex justify-center items-center">
-        <Triangle
-          visible={true}
-          height="80"
-          width="80"
-          color="#4fa94d"
-          ariaLabel="triangle-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-        />
-      </div>
-    );
-  }
   return (
-    <div className=" mx-auto my-5">
-      <div className="flex justify-end">
-        <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn m-1">
-            Filter by Genres <LuArrowDownUp />
-          </div>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+    <Container>
+      <div className="mx-auto mb-5 pt-5">
+        {/* Controls */}
+        <div className="flex flex-wrap justify-end items-center gap-2">
+          {/* Filter Dropdown */}
+          <button
+            onClick={() => [setFilter(" "), setSort(" ")]}
+            className="btn btn-sm"
           >
-            <li className="mb-2">
-              <button onClick={() => filterHandler("Action")}>Action</button>
-            </li>
-            <li>
-              <button onClick={() => filterHandler("RPG")}>RPG</button>
-            </li>
-            <li>
-              <button onClick={() => filterHandler("Adventure")}>
-                Adventure
-              </button>
-            </li>
-          </ul>
+            Reset
+          </button>
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="btn btn-sm m-1">
+              {filter ? "filtered by " + filter : " Filter by Genres"}
+              <LuArrowDownUp />
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+            >
+              <li>
+                <button onClick={() => setFilter("Action")}>Action</button>
+              </li>
+              <li>
+                <button onClick={() => setFilter("RPG")}>RPG</button>
+              </li>
+              <li>
+                <button onClick={() => setFilter("Adventure")}>
+                  Adventure
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Sort Dropdown */}
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="btn btn-sm m-1">
+              {sort ? "sorted by " + sort : " sort by  year"}
+              <LuArrowDownUp />
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+            >
+              <li>
+                <button onClick={() => setSort("rating")}>Rating</button>
+              </li>
+              <li>
+                <button onClick={() => setSort("publishingYear")}>
+                  Publishing Year
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn m-1">
-            Sort <LuArrowDownUp />
+
+        {/* Title */}
+        <h2 className="text-xl sm:text-3xl text-center my-8 font-semibold">
+          All Game Reviews: Explore the Best in Gaming
+        </h2>
+
+        {/* Loader */}
+        {loading && (
+          <div className="flex justify-center my-5">
+            <Triangle visible={true} height="50" width="50" color="#4fa94d" />
           </div>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
-          >
-            <li className="mb-2">
-              <button onClick={() => sortHandler("rating")}>Rating</button>
-            </li>
-            <li>
-              <button onClick={() => sortHandler("publishingYear")}>
-                Publishing Year
-              </button>
-            </li>
-          </ul>
+        )}
+
+        {/* Reviews Grid */}
+        <div className="grid grid-cols-2 mt-12 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-7">
+          {reviews.map((review, i) => (
+            <AllReviewsCard key={i} review={review} />
+          ))}
         </div>
       </div>
-      <h2 className="text-3xl text-center my-8 font-semibold mb-12">
-        All Game Reviews: Explore the Best in Gaming
-      </h2>
-      <div className="grid md:grid-cols-2 gap-10">
-        {reviews.map((review, i) => (
-          <AllReviewsCard key={i} review={review} />
-        ))}
-      </div>
-    </div>
+    </Container>
   );
 };
 

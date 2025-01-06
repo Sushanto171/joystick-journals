@@ -10,9 +10,7 @@ const MyReview = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(
-        `https://joystick-journals-server.vercel.app?userEmail=${user.email}`
-      )
+      fetch(`http://localhost:4000?userEmail=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           setMyReviewList(data);
