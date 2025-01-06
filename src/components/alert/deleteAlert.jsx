@@ -30,7 +30,7 @@ export const deleteAlert = (id, data, condition) => {
     .then((result) => {
       if (result.isConfirmed) {
         if (condition === "formReview") {
-          fetch("https://joystick-journals-server.vercel.app/reviews", {
+          fetch("https://joystick-journals-server.vercel.app", {
             method: "DELETE",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({ id: id }),
@@ -61,14 +61,11 @@ export const deleteAlert = (id, data, condition) => {
             isComplete: false,
           };
 
-          fetch(
-            `https://joystick-journals-server.vercel.app/updateWatchList/${user.email}`,
-            {
-              method: "PUT",
-              headers: { "content-type": "application/json" },
-              body: JSON.stringify(updateWatchListData),
-            }
-          )
+          fetch(`http://localhost:4000/updateWatchList/${user.email}`, {
+            method: "PUT",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(updateWatchListData),
+          })
             .then((res) => res.json())
             .then((data) => {
               if (data.modifiedCount > 0) {

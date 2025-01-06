@@ -11,7 +11,7 @@ const MyReview = () => {
   useEffect(() => {
     if (user?.email) {
       fetch(
-        `https://joystick-journals-server.vercel.app/reviews?userEmail=${user.email}`
+        `https://joystick-journals-server.vercel.app?userEmail=${user.email}`
       )
         .then((res) => res.json())
         .then((data) => {

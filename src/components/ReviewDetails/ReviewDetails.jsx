@@ -28,14 +28,11 @@ const ReviewDetails = () => {
       id: _id,
       isComplete: false,
     };
-    fetch(
-      `https://joystick-journals-server.vercel.app/watchList/${user.email}`,
-      {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(watchListData),
-      }
-    )
+    fetch(`http://localhost:4000/watchList/${user.email}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(watchListData),
+    })
       .then((res) => res.json())
       .then((data) => {
         successAlert(

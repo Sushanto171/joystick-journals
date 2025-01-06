@@ -47,7 +47,7 @@ const UpdateReview = () => {
       publishingYear,
     };
 
-    fetch(`https://joystick-journals-server.vercel.app/reviews/${_id}`, {
+    fetch(`https://joystick-journals-server.vercel.app/${_id}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(updatedReview),

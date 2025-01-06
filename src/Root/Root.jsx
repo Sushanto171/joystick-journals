@@ -23,8 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/all-reviews",
-        loader: () =>
-          fetch("https://joystick-journals-server.vercel.app/reviews"),
+        loader: () => fetch("https://joystick-journals-server.vercel.app"),
         element: <AllReview />,
       },
       {
@@ -39,7 +38,7 @@ const router = createBrowserRouter([
         path: "/review-details/:id",
         loader: async ({ params }) =>
           await fetch(
-            `https://joystick-journals-server.vercel.app/reviews/${params.id}`
+            `https://joystick-journals-server.vercel.app/${params.id}`
           ),
         element: (
           <PrivateRoute>
@@ -58,9 +57,7 @@ const router = createBrowserRouter([
       {
         path: "/update-review/:id",
         loader: ({ params }) =>
-          fetch(
-            `https://joystick-journals-server.vercel.app/reviews/${params.id}`
-          ),
+          fetch(`https://joystick-journals-server.vercel.app/${params.id}`),
         element: (
           <PrivateRoute>
             <UpdateReview />
