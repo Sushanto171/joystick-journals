@@ -1,5 +1,6 @@
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router";
+import SectionTitle from "../shared/SectionTitle";
 
 const FeaturedDevelopers = () => {
   const developers = [
@@ -55,8 +56,7 @@ const FeaturedDevelopers = () => {
 
   return (
     <div className=" rounded-md pb-10">
-      <h2 className="text-3xl font-bold text-center">Featured Developers</h2>
-      <div className="border mb-12 max-w-72 mt-2 mx-auto"></div>
+      <SectionTitle title="Featured Developers" />
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-4 md:gap-6">
         {developers.map((dev, i) => (
           <div

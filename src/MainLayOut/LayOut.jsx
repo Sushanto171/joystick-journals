@@ -23,12 +23,14 @@ const LayOut = () => {
     );
   }
   return (
-    <div>
+    <div className="relative">
       {/* navbar */}
-      <Navbar />
+      <div className="sticky top-0 z-20 w-full">
+        <Navbar />
+      </div>
 
       {/* dynamic */}
-      <div className="max-w-screen-xl min-h-[calc(100vh-450px)] bg-base-100 mx-auto">
+      <div className="max-w-screen-xl min-h-[calc(100vh-450px)] bg-base-100 mx-auto ">
         <Outlet />
       </div>
 

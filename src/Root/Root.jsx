@@ -1,7 +1,10 @@
 import { createBrowserRouter } from "react-router";
+import LatestGamesNews from "../components/LatestGamesNews/LatestGamesNews";
 import ReviewDetails from "../components/ReviewDetails/ReviewDetails";
 import UpdateReview from "../components/UpdateReview/UpdateReview";
+import About from "../pages/About/About";
 import LogIn from "../pages/logIn/LogIn";
+import Service from "../pages/Service/Service";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import LayOut from "./../MainLayOut/LayOut";
 import AddReview from "./../pages/addReview/AddReview";
@@ -72,6 +75,18 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/about-us",
+        element: <About />,
+      },
+      {
+        path: "/service",
+        element: <Service />,
+      },
+      {
+        path: "/latest-games-news",
+        element: <LatestGamesNews />,
       },
     ],
   },

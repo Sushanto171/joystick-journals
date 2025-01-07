@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import HighestRatedCard from "../HighesRatedCard/HighesRatedCard";
+import SectionTitle from "../shared/SectionTitle";
 
 const HighestRated = () => {
   const [highest, setHighest] = useState([]);
@@ -12,10 +13,7 @@ const HighestRated = () => {
   }, []);
   return (
     <div className=" mx-auto  pt-6  rounded-md pb-10">
-      <h2 className="text-2xl sm:text-3xl font-semibold text-center pt-4">
-        Highest Rated Games
-      </h2>
-      <div className="border mb-12 max-w-72 mt-1 mx-auto"></div>
+      <SectionTitle title="Top Reviews Games" />
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-7">
         {highest.map((list) => (
           <HighestRatedCard key={list._id} list={list} />

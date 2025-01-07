@@ -51,7 +51,7 @@ const Banner = () => {
       <Swiper
         spaceBetween={30}
         effect="fade"
-        navigation={true}
+        // navigation={true}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,

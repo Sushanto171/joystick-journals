@@ -22,6 +22,9 @@ const Navbar = () => {
   const navName = [
     "Home",
     "All Reviews",
+    "Latest Games News",
+    "Service",
+    "About us",
     "Add Review",
     "My Reviews",
     "Game WatchList",
@@ -32,7 +35,8 @@ const Navbar = () => {
       key={i}
       to={`/${name === "Home" ? "" : name.toLowerCase().split(" ").join("-")}`}
       className={({ isActive }) => `${isActive ? "text-[#28AE4E] " : ""} 
-      ${i > 1 ? (user ? "" : `hidden`) : ""}
+      ${i > 4 ? (user ? "" : `hidden`) : ""}
+      ${i > 1 && i < 5 ? (user ? "hidden" : ``) : ""}
       `}
     >
       {({ isActive }) => (
@@ -67,7 +71,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <div className="drawer ">
+      <div className="drawer  sticky top-0">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle " />
         <div className="drawer-content flex flex-col ">
           {/* Navbar */}
