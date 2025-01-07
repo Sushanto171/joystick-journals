@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router";
+import DetailsBlog from "../components/DetailsBlog/DetailsBlog";
 import LatestGamesNews from "../components/LatestGamesNews/LatestGamesNews";
 import ReviewDetails from "../components/ReviewDetails/ReviewDetails";
 import UpdateReview from "../components/UpdateReview/UpdateReview";
@@ -93,6 +94,14 @@ const router = createBrowserRouter([
       {
         path: "/latest-games-news",
         element: <LatestGamesNews />,
+      },
+      {
+        path: "/news/:id",
+        loader: ({ params }) =>
+          fetch(
+            `https://joystick-journals-server.vercel.app/news/${params.id}`
+          ),
+        element: <DetailsBlog />,
       },
     ],
   },

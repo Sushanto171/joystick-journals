@@ -89,9 +89,6 @@ const FeaturedDevelopers = () => {
                   <FaGithub className="text-gray-800 text-lg sm:text-xl md:text-2xl hover:text-gray-600 transition" />
                 </Link>
               </div>
-              <button className="btn bg-[#4ade80] hover:bg-[#28AE4E] font-bold text-white border-0 btn-sm sm:btn-md ">
-                Learn More
-              </button>
             </div>
           </div>
         ))}

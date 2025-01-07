@@ -3,7 +3,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 const SectionTitle = ({ title, icon }) => {
   const { isDark } = useContext(AuthContext);
   const theme = isDark;
-  console.log(theme);
+
   return (
     <div key={theme} className="max-w-fit mx-auto">
       <h2

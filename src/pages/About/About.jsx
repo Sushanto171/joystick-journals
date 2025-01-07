@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { FaGamepad, FaNewspaper, FaStar, FaUsers } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import SectionTitle from "../../components/shared/SectionTitle";
 import { AuthContext } from "../../Providers/AuthProvider";
 const About = () => {
@@ -73,9 +74,12 @@ const About = () => {
               <span className="font-bold text-[#6ad889]">Start</span> and
               explore the world of gaming together!
             </p>
-            <button className="bg-[#4ade80]  hover:bg-[#28AE4E] text-white px-6 py-2 rounded-md font-semibold  transition">
+            <Link
+              to="/about-us"
+              className="btn bg-[#4ade80]  hover:bg-[#28AE4E] text-white px-6 py-2 rounded-md font-semibold  transition"
+            >
               Join the Community 🚀
-            </button>
+            </Link>
           </div>
         </div>
       </section>

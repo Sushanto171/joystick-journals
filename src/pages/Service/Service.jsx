@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { FaChartLine, FaGamepad, FaSearch, FaUsers } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import SectionTitle from "../../components/shared/SectionTitle";
 import { AuthContext } from "../../Providers/AuthProvider";
 const Service = () => {
@@ -73,9 +74,12 @@ const Service = () => {
             >
               Explore our services and level up your gaming journey today!
             </p>
-            <button className=" text-white px-6 py-2 rounded-md font-semibold bg-[#4ade80]  hover:bg-[#28AE4E] transition">
+            <Link
+              to="/services"
+              className="btn text-white px-6 py-2 rounded-md font-semibold bg-[#4ade80]  hover:bg-[#28AE4E] transition"
+            >
               Get Started 🚀
-            </button>
+            </Link>
           </div>
         </div>
       </section>

@@ -19,6 +19,7 @@ const UpComingGames = () => {
     <div className="mt-8 ">
       <SectionTitle title={"Upcoming Games"} />
       <Swiper
+        freeMode={true}
         slidesPerView={2}
         spaceBetween={20}
         breakpoints={{

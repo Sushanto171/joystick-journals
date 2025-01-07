@@ -22,7 +22,7 @@ const LatestGames = () => {
         Array.isArray(data) && setHighest(data);
       });
   }, []);
-  console.log(highest);
+
   return (
     <div className="max-w-7xl mx-auto latest">
       <SectionTitle title={"🎮 Latest Games"} />

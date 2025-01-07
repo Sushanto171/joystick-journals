@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const GameNewsCard = ({ title, thumbnail, description, source, date }) => {
+const GameNewsCard = ({ title, thumbnail, description, source, date, _id }) => {
   return (
     <div className="bg-white flex flex-col sm:flex-row border border-gray-200 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       {/* Thumbnail */}
@@ -17,15 +18,18 @@ const GameNewsCard = ({ title, thumbnail, description, source, date }) => {
         <h2 className="text-lg font-bold text-gray-800 mb-2 line-clamp-2">
           {title}
         </h2>
-        <p className="text-sm text-gray-600 mb-4 line-clamp-5">{description}</p>
+        <p className="text-sm text-gray-600 mb-4 line-clamp-3">{description}</p>
         <div className="mt-auto flex flex-col sm:flex-row justify-between items-start sm:items-center text-sm text-gray-500 gap-2 sm:gap-0">
           <span>📅 {date}</span>
           <span>🔗 {source}</span>
         </div>
         {/* Read More Button */}
-        <button className="btn w-fit mt-2 bg-[#4ade80] btn-sm sm:btn-md hover:bg-[#28AE4E] border-0 text-white text-xs sm:text-sm px-3 py-1 rounded-md transition-all duration-200">
+        <Link
+          to={`/news/${_id}`}
+          className="btn w-fit mt-2 bg-[#4ade80] btn-sm sm:btn-md hover:bg-[#28AE4E] border-0 text-white text-xs sm:text-sm px-3 py-1 rounded-md transition-all duration-200"
+        >
           Read More
-        </button>
+        </Link>
       </div>
     </div>
   );
