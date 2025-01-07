@@ -14,6 +14,7 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
@@ -64,6 +65,8 @@ const AuthProvider = ({ children }) => {
     setUser,
     loading,
     setLoading,
+    isDark,
+    setIsDark,
   };
 
   return <AuthContext.Provider value={info}>{children}</AuthContext.Provider>;

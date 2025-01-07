@@ -7,7 +7,7 @@ import { successAlert } from "../alert/SuccessAlert";
 import Container from "../shared/Container";
 
 const ReviewDetails = () => {
-  const { user } = useContext(AuthContext);
+  const { user, isDark } = useContext(AuthContext);
   const review = useLoaderData();
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,11 +33,14 @@ const ReviewDetails = () => {
       id: _id,
       isComplete: false,
     };
-    fetch(`http://localhost:4000/watchList/${user.email}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(watchListData),
-    })
+    fetch(
+      `https://joystick-journals-server.vercel.app/watchList/${user.email}`,
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(watchListData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         successAlert(
@@ -52,7 +55,12 @@ const ReviewDetails = () => {
   };
   return (
     <Container>
-      <div className="card h-full  bg-base-200 shadow rounded-lg overflow-hidden my-10">
+      <div
+        className={`card 
+        h-full  bg-base-200 shadow rounded-lg overflow-hidden my-10 ${
+          isDark ? "text-white" : "text-gray-600"
+        } `}
+      >
         <main className="p-2 sm:p-5 mb-5 flex flex-col">
           <div className="border-b-2 mb-5 space-y-2 pb-4">
             <h1 className="text-3xl font-semibold leading-relaxed">

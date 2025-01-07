@@ -42,7 +42,7 @@ const AllReviewsCard = ({ review }) => {
           </p>
           <button
             onClick={() => navigate(`/review-details/${_id}`)}
-            className="btn btn-sm sm:btn-md mt-2 text-white bg-[#4ade80] hover:bg-[#28AE4E] font-bold"
+            className="btn btn-sm border-0 sm:btn-md mt-2 text-white bg-[#4ade80] hover:bg-[#28AE4E] font-bold"
           >
             Explore Details
           </button>

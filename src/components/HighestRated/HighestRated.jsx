@@ -5,7 +5,9 @@ import SectionTitle from "../shared/SectionTitle";
 const HighestRated = () => {
   const [highest, setHighest] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:4000/reviews?rating="4"&limit="6"`)
+    fetch(
+      `https://joystick-journals-server.vercel.app/reviews?rating="4"&limit="6"`
+    )
       .then((res) => res.json())
       .then((data) => {
         Array.isArray(data) && setHighest(data);

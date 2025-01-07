@@ -30,7 +30,7 @@ const LayOut = () => {
       </div>
 
       {/* dynamic */}
-      <div className="max-w-screen-xl min-h-[calc(100vh-450px)] bg-base-100 mx-auto ">
+      <div className="max-w-screen-xl min-h-[calc(100vh-450px)] pb-12 bg-base-100 mx-auto ">
         <Outlet />
       </div>
 

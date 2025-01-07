@@ -11,7 +11,7 @@ const UpComingGames = () => {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/upcoming-games")
+    fetch("https://joystick-journals-server.vercel.app/upcoming-games")
       .then((res) => res.json())
       .then((data) => setGames(data));
   }, []);

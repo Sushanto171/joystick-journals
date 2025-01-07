@@ -7,7 +7,7 @@ const LatestGamesNews = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/news")
+    fetch("https://joystick-journals-server.vercel.app/news")
       .then((res) => res.json())
       .then((data) => setNews(data));
   }, []);

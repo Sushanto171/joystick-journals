@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { successAlert } from "../../components/alert/SuccessAlert";
 import Container from "../../components/shared/Container";
+import SectionTitle from "../../components/shared/SectionTitle";
 const Register = () => {
   const { logInWithGoogle, logInWithGithub, createUser, setUser } =
     useContext(AuthContext);
@@ -79,7 +80,7 @@ const Register = () => {
         successAlert("Register Success!");
         form.reset();
         navigate("/");
-        fetch(`http://localhost:4000/users/${email}`, {
+        fetch(`https://joystick-journals-server.vercel.app/users/${email}`, {
           method: "PUT",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(data),
@@ -111,7 +112,7 @@ const Register = () => {
         const email = res.user.email;
         const photo = res.user.photoURL;
         const data = { name, email, photo };
-        fetch(`http://localhost:4000/users/${email}`, {
+        fetch(`https://joystick-journals-server.vercel.app/users/${email}`, {
           method: "PUT",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(data),
@@ -139,7 +140,7 @@ const Register = () => {
         const email = res.user.email;
         const photo = res.user.photoURL;
         const data = { name, email, photo };
-        fetch(`http://localhost:4000/users/${email}`, {
+        fetch(`https://joystick-journals-server.vercel.app/users/${email}`, {
           method: "PUT",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(data),
@@ -158,9 +159,7 @@ const Register = () => {
   return (
     <Container>
       <div className="flex flex-col justify-center items-center bg-base-100">
-        <h2 className="my-5 text-2xl md:text-3xl font-semibold">
-          Register Now
-        </h2>
+        <SectionTitle title={"Register Now"} />
         <div className="card w-full rounded-md border-b-4 border-gray-50 hover:border-green-400 max-w-lg shrink-0 shadow hover:shadow-2xl">
           <form className="card-body pb-0 " onSubmit={registerFormHandler}>
             <div className="md:grid grid-cols-2 gap-4">

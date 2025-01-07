@@ -7,9 +7,9 @@ import logo from "./../../assets/image-removebg-preview (3).png";
 import { successAlert } from "./../alert/SuccessAlert";
 
 const Navbar = () => {
-  const { user, signOutUser, setUser } = useContext(AuthContext);
+  const { user, signOutUser, setUser, setIsDark } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
 
   // theme change
   useEffect(() => {
@@ -17,13 +17,14 @@ const Navbar = () => {
       "data-theme",
       `${dark ? "dark" : "light"}`
     );
+    setIsDark(dark);
   }, [dark]);
 
   const navName = [
     "Home",
     "All Reviews",
     "Latest Games News",
-    "Service",
+    "Services",
     "About us",
     "Add Review",
     "My Reviews",
@@ -52,7 +53,7 @@ const Navbar = () => {
     </NavLink>
   ));
   useEffect(() => {
-    fetch(`http://localhost:4000/users/${user?.email}`)
+    fetch(`https://joystick-journals-server.vercel.app/users/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         if (data) setUser(data);
@@ -69,13 +70,14 @@ const Navbar = () => {
     });
     navigate("/");
   };
+
   return (
     <>
-      <div className="drawer  sticky top-0">
+      <div className="drawer">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle " />
         <div className="drawer-content flex flex-col ">
           {/* Navbar */}
-          <nav className=" bg-black/85 w-full  flex justify-between items-center h-20 px-2 text-white/80 sm:px-5 md:px-10">
+          <nav className="backdrop-blur-3xl bg-black/90 text-white w-full font-medium text-lg flex justify-between items-center h-20 px-2  sm:px-5 md:px-10">
             <div className="md:hidden">
               <label
                 htmlFor="my-drawer-3"

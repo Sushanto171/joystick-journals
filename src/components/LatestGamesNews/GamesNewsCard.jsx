@@ -2,7 +2,7 @@ import React from "react";
 
 const GameNewsCard = ({ title, thumbnail, description, source, date }) => {
   return (
-    <div className="bg-white flex flex-col sm:flex-row border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <div className="bg-white flex flex-col sm:flex-row border border-gray-200 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       {/* Thumbnail */}
       <div className="w-full sm:w-1/3 h-full md:max-h-64">
         <img

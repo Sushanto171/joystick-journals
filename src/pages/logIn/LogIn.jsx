@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { successAlert } from "../../components/alert/SuccessAlert";
 import Container from "../../components/shared/Container";
+import SectionTitle from "../../components/shared/SectionTitle";
 
 const LogIn = () => {
   const { logInWithGoogle, logInWithGithub, signInWithEmailPass, setUser } =
@@ -29,7 +30,9 @@ const LogIn = () => {
           navigate(state ? state?.form : "/");
           successAlert("Log in success!");
           form.reset();
-          fetch(`http://localhost:4000/users/${user?.email}`)
+          fetch(
+            `https://joystick-journals-server.vercel.app/users/${user?.email}`
+          )
             .then((res) => user && res.json())
             .then((data) => {
               setUser(data);
@@ -54,7 +57,7 @@ const LogIn = () => {
           const data = { name, email, photo };
           successAlert("Log in success");
           navigate("/");
-          fetch(`http://localhost:4000/users/${email}`, {
+          fetch(`https://joystick-journals-server.vercel.app/users/${email}`, {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),
@@ -86,7 +89,7 @@ const LogIn = () => {
           successAlert("Log in success");
           navigate("/");
           const data = { name, email, photo };
-          fetch(`http://localhost:4000/users/${email}`, {
+          fetch(`https://joystick-journals-server.vercel.app/users/${email}`, {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),
@@ -108,7 +111,7 @@ const LogIn = () => {
   return (
     <Container>
       <div className="flex flex-col justify-center items-center bg-base-100">
-        <h2 className="my-5 text-2xl md:text-3xl font-semibold">Log in Now</h2>
+        <SectionTitle title={"Log in Now"} />
         <div className="card w-full rounded-md border-b-4 hover:border-[#28AE4E] max-w-sm shrink-0 shadow hover:shadow-2xl">
           <form className="card-body pb-0 " onSubmit={logInFormHandler}>
             <div className="form-control">

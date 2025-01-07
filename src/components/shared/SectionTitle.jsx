@@ -1,9 +1,16 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
 const SectionTitle = ({ title, icon }) => {
+  const { isDark } = useContext(AuthContext);
+  const theme = isDark;
+  console.log(theme);
   return (
-    <div className="max-w-fit mx-auto">
-      <h2 className="text-2xl sm:text-3xl font-semibold text-center pt-4">
+    <div key={theme} className="max-w-fit mx-auto">
+      <h2
+        className={`text-2xl sm:text-3xl font-semibold text-center pt-4 ${
+          theme ? "!text-white" : "!text-black"
+        }`}
+      >
         {icon}
         {title}
       </h2>

@@ -16,7 +16,7 @@ import { FreeMode, Pagination } from "swiper/modules";
 const LatestGames = () => {
   const [highest, setHighest] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:4000/reviews`)
+    fetch(`https://joystick-journals-server.vercel.app/reviews`)
       .then((res) => res.json())
       .then((data) => {
         Array.isArray(data) && setHighest(data);
@@ -48,7 +48,7 @@ const LatestGames = () => {
       >
         {highest.map((game) => (
           <SwiperSlide key={game._id}>
-            <div className="relative rounded-lg overflow-hidden shadow-lg bg-gray-800 text-white">
+            <div className="relative rounded-lg overflow-hidden shadow-lg bg-white">
               <div className="h-40 sm:h-56">
                 <img
                   src={game.thumbnail}

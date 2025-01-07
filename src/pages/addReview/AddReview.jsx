@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { successAlert } from "../../components/alert/SuccessAlert";
 import Container from "../../components/shared/Container";
+import SectionTitle from "../../components/shared/SectionTitle";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const AddReview = () => {
   const { user, setUser } = useContext(AuthContext);
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:4000/users/${user?.email}`)
+      fetch(`https://joystick-journals-server.vercel.app/users/${user?.email}`)
         .then((res) => res.json())
         .then((data) => {
           if (data) setUser(data);
@@ -48,7 +49,7 @@ const AddReview = () => {
     };
 
     // add data to database
-    fetch("http://localhost:4000", {
+    fetch("https://joystick-journals-server.vercel.app/reviews", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(review),
@@ -62,12 +63,13 @@ const AddReview = () => {
 
   return (
     <Container>
-      <div className="my-5">
+      <div className="">
         <div className="w-10/12 max-w-4xl mx-auto text-center my-10">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold">
-            Add your review and contribute continuously to help others make
-            informed decisions
-          </h2>
+          <SectionTitle
+            title={
+              "Add your review and contribute continuously to help others make informed decisions"
+            }
+          />
         </div>
         <div className="card bg-base-100 shrink-0 shadow rounded-md border-b-4 hover:border-[#28AE4E] hover:shadow-2xl">
           <form onSubmit={addReviewHandler} className="card-body">

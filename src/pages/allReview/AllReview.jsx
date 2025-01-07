@@ -4,6 +4,7 @@ import { Triangle } from "react-loader-spinner";
 import { useLoaderData } from "react-router";
 import AllReviewsCard from "../../components/allReviewsCard/allReviewsCard";
 import Container from "../../components/shared/Container";
+import SectionTitle from "../../components/shared/SectionTitle";
 
 const AllReview = () => {
   const data = useLoaderData() || [];
@@ -20,7 +21,9 @@ const AllReview = () => {
 
   const fetchReviews = (queryParam, condition) => {
     setLoading(true);
-    fetch(`http://localhost:4000/reviews?${queryParam}=${condition}`)
+    fetch(
+      `https://joystick-journals-server.vercel.app/reviews?${queryParam}=${condition}`
+    )
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -103,9 +106,8 @@ const AllReview = () => {
         </div>
 
         {/* Title */}
-        <h2 className="text-xl sm:text-3xl text-center my-8 font-semibold">
-          All Game Reviews: Explore the Best in Gaming
-        </h2>
+
+        <SectionTitle title={"All Game Reviews: Explore the Best in Gaming"} />
 
         {/* Loader */}
         {loading && (
