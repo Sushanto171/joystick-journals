@@ -106,8 +106,8 @@
 
 ## 📬 Contact 📧📲
 
-- 📧 **Email:** [sushantochandrasharkar171@gmail.com](mailto:sushantochandrasharkar171@gmail.com)
-- 🌐 **LinkedIn:** [Sushanto Chandra Sharkar](https://www.linkedin.com/in/sushanto-chandra-sharkar-144b95339/)
+- 📧 **Email:** [sushantokumar171@gmail.com](mailto:sushantokumar171@gmail.com)
+- 🌐 **LinkedIn:** [Sushanto kumar](https://www.linkedin.com/in/sushanto-kumar171/)
 
 ---
 
